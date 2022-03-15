@@ -9,16 +9,30 @@ public enum EnemyStates { GUARD, PATROL, CHASE, DIE }
 
 public class EnemyController : MonoBehaviour
 {
-    public EnemyStates enemyStates;
+    private EnemyStates enemyStates;
     private NavMeshAgent agent;
+
+    [Header("Basic Settings")]
+    public float sightRadius;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
     }
 
+    void Update()
+    {
+        SwitchStates();
+    }
+
     void SwitchStates()
     {
+        if (FoundPlayer())
+        {
+            enemyStates = EnemyStates.CHASE;
+            Debug.Log("Player Found!");
+        }
+
         switch (enemyStates)
         {
             case EnemyStates.GUARD:
@@ -30,5 +44,18 @@ public class EnemyController : MonoBehaviour
             case EnemyStates.DIE:
                 break;
         }
+    }
+
+    bool FoundPlayer()
+    {
+        var colliders = Physics.OverlapSphere(transform.position, sightRadius);
+
+        foreach (var target in colliders)
+        {
+            if (target.CompareTag("Player"))
+                return true;
+        }
+
+        return false;
     }
 }
