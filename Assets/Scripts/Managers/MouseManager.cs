@@ -12,7 +12,7 @@ public class MouseManager : MonoBehaviour
 
     public Texture2D point, doorway, attack, target, arrow;
     RaycastHit hitInfo;  // 保存射线碰撞到物体的信息
-    
+
     public event Action<Vector3> OnMouseClicked;
 
     void Awake()
@@ -40,7 +40,10 @@ public class MouseManager : MonoBehaviour
             switch (hitInfo.collider.gameObject.tag)
             {
                 case "Ground":
-                    Cursor.SetCursor(target, new Vector2(0, 0), CursorMode.Auto);
+                    Cursor.SetCursor(target, new Vector2(16, 16), CursorMode.Auto);
+                    break;
+                case "Enemy":
+                    Cursor.SetCursor(attack, new Vector2(16, 16), CursorMode.Auto);
                     break;
             }
         }
