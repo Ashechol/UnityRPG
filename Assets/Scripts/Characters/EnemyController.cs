@@ -11,13 +11,20 @@ public class EnemyController : MonoBehaviour
 {
     private EnemyStates enemyStates;
     private NavMeshAgent agent;
+    private GameObject attackTarget;
+    private Animator anim;
+    private bool isWalk, isFollow, isChase;
+    private float speed;
 
     [Header("Basic Settings")]
     public float sightRadius;
+    public bool isGuard;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
+        speed = agent.speed;
     }
 
     void Update()
@@ -30,7 +37,7 @@ public class EnemyController : MonoBehaviour
         if (FoundPlayer())
         {
             enemyStates = EnemyStates.CHASE;
-            Debug.Log("Player Found!");
+            // Debug.Log("Player Found!");
         }
 
         switch (enemyStates)
@@ -40,6 +47,15 @@ public class EnemyController : MonoBehaviour
             case EnemyStates.PATROL:
                 break;
             case EnemyStates.CHASE:
+                agent.speed = speed;
+                if (!FoundPlayer())
+                {
+
+                }
+                else
+                {
+                    agent.destination = attackTarget.transform.position;
+                }
                 break;
             case EnemyStates.DIE:
                 break;
@@ -53,8 +69,13 @@ public class EnemyController : MonoBehaviour
         foreach (var target in colliders)
         {
             if (target.CompareTag("Player"))
+            {
+                attackTarget = target.gameObject;
                 return true;
+            }
         }
+
+        attackTarget = null;
 
         return false;
     }
