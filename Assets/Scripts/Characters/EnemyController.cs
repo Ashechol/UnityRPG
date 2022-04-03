@@ -20,6 +20,10 @@ public class EnemyController : MonoBehaviour
     public float sightRadius;
     public bool isGuard;
 
+    [Header("Patrol Settings")]
+    public float patrolRange;
+    public Vector3 wayPoint;
+
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -27,9 +31,21 @@ public class EnemyController : MonoBehaviour
         speed = agent.speed;
     }
 
+    void Start()
+    {
+        if (isGuard)
+            enemyStates = EnemyStates.GUARD;
+        else
+        {
+            enemyStates = EnemyStates.PATROL;
+            GetNewWayPoint();
+        }
+    }
     void Update()
     {
         SwitchStates();
+        SwitchAnimation();
+        Debug.Log(agent.destination);
     }
 
     void SwitchStates()
@@ -45,21 +61,47 @@ public class EnemyController : MonoBehaviour
             case EnemyStates.GUARD:
                 break;
             case EnemyStates.PATROL:
+                isChase = false;
+                agent.speed = speed * 0.6f;
+
+                if (Vector3.Distance(wayPoint, transform.position) <= agent.stoppingDistance)
+                {
+                    isWalk = false;
+                    GetNewWayPoint();
+                }
+                else
+                {
+                    isWalk = true;
+                    agent.destination = wayPoint;
+                }
+
                 break;
             case EnemyStates.CHASE:
                 agent.speed = speed;
+                isWalk = false;
+                isChase = true;
+                //TODO: 做一个走出区域脱战
                 if (!FoundPlayer())
                 {
-
+                    isFollow = false;
+                    agent.destination = transform.position;  // 脱战停止追击
                 }
                 else
                 {
                     agent.destination = attackTarget.transform.position;
+                    isFollow = true;
                 }
                 break;
             case EnemyStates.DIE:
                 break;
         }
+    }
+
+    void SwitchAnimation()
+    {
+        anim.SetBool("walk", isWalk);
+        anim.SetBool("follow", isFollow);
+        anim.SetBool("chase", isChase);
     }
 
     bool FoundPlayer()
@@ -78,5 +120,23 @@ public class EnemyController : MonoBehaviour
         attackTarget = null;
 
         return false;
+    }
+
+    void GetNewWayPoint()
+    {
+        float randomX = Random.Range(-patrolRange, patrolRange);
+        float randomZ = Random.Range(-patrolRange, patrolRange);
+        // FIXME: Bug
+        Vector3 randomPoint = new Vector3(transform.position.x + randomX,
+                                          transform.position.y,
+                                          transform.position.z + randomZ);
+
+        wayPoint = randomPoint;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, sightRadius);
     }
 }
