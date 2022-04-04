@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Data", menuName = "Character Stats/Data")]
+[CreateAssetMenu(fileName = "New Data", menuName = "RPG/Character Data")]
 public class CharacterData_SO : ScriptableObject
 {
     [Header("State Info")]

@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     private NavMeshAgent agent;
     private GameObject attackTarget;
     private Animator anim;
+    private CharacterStats characterStats;
     private bool isWalk, isFollow, isChase;
     private float speed;
     private Vector3 guardPos;
@@ -22,6 +23,7 @@ public class EnemyController : MonoBehaviour
     public bool isGuard;
     public float lookAtTime;
     private float remainLookAtTime;
+    private float lastAttackTime;
 
     [Header("Patrol Settings")]
     public float patrolRange;
@@ -31,6 +33,7 @@ public class EnemyController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        characterStats = GetComponent<CharacterStats>();
         speed = agent.speed;
         guardPos = transform.position;
     }
@@ -49,6 +52,7 @@ public class EnemyController : MonoBehaviour
     {
         SwitchStates();
         SwitchAnimation();
+        lastAttackTime -= Time.deltaTime;
     }
 
     void SwitchStates()
@@ -105,6 +109,26 @@ public class EnemyController : MonoBehaviour
                 {
                     agent.destination = attackTarget.transform.position;
                     isFollow = true;
+                    agent.isStopped = false;
+                }
+
+                // 攻击范围检测
+                if (TargetInAttackRange() || TargetInSkillRange())
+                {
+                    isFollow = false;
+                    agent.isStopped = true;
+
+                    if (lastAttackTime < 0)
+                    {
+                        lastAttackTime = characterStats.attackData.coolDown;
+
+                        // 暴击
+                        characterStats.isCritical = Random.value < characterStats.attackData.criticalChance;
+
+                        // 攻击
+                        Attack();
+                        // }
+                    }
                 }
                 break;
             case EnemyStates.DIE:
@@ -117,6 +141,7 @@ public class EnemyController : MonoBehaviour
         anim.SetBool("walk", isWalk);
         anim.SetBool("follow", isFollow);
         anim.SetBool("chase", isChase);
+        anim.SetBool("critical", characterStats.isCritical);
     }
 
     bool FoundPlayer()
@@ -135,6 +160,40 @@ public class EnemyController : MonoBehaviour
         attackTarget = null;
 
         return false;
+    }
+
+    bool TargetInAttackRange()
+    {
+        if (attackTarget != null)
+            return Vector3.Distance(attackTarget.transform.position, transform.position) <=
+                                    characterStats.attackData.attackRange;
+        else
+            return false;
+
+    }
+
+    bool TargetInSkillRange()
+    {
+        if (attackTarget != null)
+            return Vector3.Distance(attackTarget.transform.position, transform.position) <=
+                                    characterStats.attackData.skillRange;
+        else
+            return false;
+    }
+
+    void Attack()
+    {
+        transform.LookAt(attackTarget.transform);
+
+        if (TargetInAttackRange())
+        {
+            anim.SetTrigger("attack");
+        }
+
+        if (TargetInSkillRange())
+        {
+            anim.SetTrigger("skill");
+        }
     }
 
     void GetNewWayPoint()
