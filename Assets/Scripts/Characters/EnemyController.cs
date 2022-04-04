@@ -15,10 +15,13 @@ public class EnemyController : MonoBehaviour
     private Animator anim;
     private bool isWalk, isFollow, isChase;
     private float speed;
+    private Vector3 guardPos;
 
     [Header("Basic Settings")]
     public float sightRadius;
     public bool isGuard;
+    public float lookAtTime;
+    private float remainLookAtTime;
 
     [Header("Patrol Settings")]
     public float patrolRange;
@@ -29,6 +32,7 @@ public class EnemyController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         speed = agent.speed;
+        guardPos = transform.position;
     }
 
     void Start()
@@ -45,7 +49,6 @@ public class EnemyController : MonoBehaviour
     {
         SwitchStates();
         SwitchAnimation();
-        Debug.Log(agent.destination);
     }
 
     void SwitchStates()
@@ -67,7 +70,10 @@ public class EnemyController : MonoBehaviour
                 if (Vector3.Distance(wayPoint, transform.position) <= agent.stoppingDistance)
                 {
                     isWalk = false;
-                    GetNewWayPoint();
+                    if (remainLookAtTime > 0)
+                        remainLookAtTime -= Time.deltaTime;
+                    else
+                        GetNewWayPoint();
                 }
                 else
                 {
@@ -84,7 +90,16 @@ public class EnemyController : MonoBehaviour
                 if (!FoundPlayer())
                 {
                     isFollow = false;
-                    agent.destination = transform.position;  // 脱战停止追击
+                    // 脱战停止追击
+                    if (remainLookAtTime > 0)
+                    {
+                        agent.destination = transform.position;
+                        remainLookAtTime -= Time.deltaTime;
+                    }
+                    else if (isGuard)
+                        enemyStates = EnemyStates.GUARD;
+                    else
+                        enemyStates = EnemyStates.PATROL;
                 }
                 else
                 {
@@ -124,14 +139,17 @@ public class EnemyController : MonoBehaviour
 
     void GetNewWayPoint()
     {
+        remainLookAtTime = lookAtTime;
         float randomX = Random.Range(-patrolRange, patrolRange);
         float randomZ = Random.Range(-patrolRange, patrolRange);
-        // FIXME: Bug
-        Vector3 randomPoint = new Vector3(transform.position.x + randomX,
-                                          transform.position.y,
-                                          transform.position.z + randomZ);
 
-        wayPoint = randomPoint;
+        Vector3 randomPoint = new Vector3(guardPos.x + randomX,
+                                          transform.position.y,  // y轴使用当前坐标防止悬浮
+                                          guardPos.z + randomZ);
+
+        NavMeshHit hit;
+        wayPoint = NavMesh.SamplePosition(randomPoint, out hit, patrolRange, 1) ?
+                   hit.position : transform.position;
     }
 
     private void OnDrawGizmosSelected()

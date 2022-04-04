@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     private NavMeshAgent agent;
     public Animator anim;
-
+    public CharacterStats characterStats;
     private GameObject attackTarget;
     private float lastAttackTime;
 
@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        characterStats = GetComponent<CharacterStats>();
     }
 
     void Start()

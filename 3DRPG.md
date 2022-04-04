@@ -30,3 +30,19 @@ shader graph：可视化的面板中完成shader功能的实现。如遮挡剔�
 
 Camera.ScreenPointToRay：返回从摄像机通过屏幕点的光线。
 Physics.Raycast：返回射线碰撞的坐标
+
+ScriptableObject：当C#脚本继承了ScriptObject可以定义一个数据模板，在assets中快速创建模板化ScriptableObject
+
+```csharp
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "New Data", menuName = "Character Stats/Data")]
+public class CharacterData_SO : ScriptableObject
+{
+    [Header("State Info")]
+    public int maxHealth;
+    public int currentHealth;
+    public int baseDefence;
+    public int currentDefence;
+}
+```
