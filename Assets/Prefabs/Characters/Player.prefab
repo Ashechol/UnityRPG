@@ -1850,6 +1850,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterData: {fileID: 11400000, guid: c66807ed3e99a6845b8e20a240efc73c, type: 2}
+  attackData: {fileID: 11400000, guid: 06ee8c8cd71b3fc4fb5e673ccd5f4c63, type: 2}
+  isCritical: 0
 --- !u!1 &6449158702150135739
 GameObject:
   m_ObjectHideFlags: 0
