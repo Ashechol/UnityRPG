@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public CharacterStats characterStats;
     private GameObject attackTarget;
     private float lastAttackTime;
+    private bool isDead;
 
     void Awake()
     {
@@ -29,8 +28,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        isDead = characterStats.CurrentHealth == 0;
         SwitchAnimation();
-
         lastAttackTime -= Time.deltaTime;
     }
 
@@ -39,6 +38,7 @@ public class PlayerController : MonoBehaviour
         // NevMeshAgent.velocity 是一个 Vector3 的变量，使用 sqrMagnitude 成员变量获取速度向量的平方长度
         // sqrMagnitude 平方获取要比 Magnitude 快一些，一般使用 sqrMagnitude
         anim.SetFloat("speed", agent.velocity.sqrMagnitude);
+        anim.SetBool("dead", isDead);
     }
 
     public void MoveToTarget(Vector3 target)
@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
         if (target != null)  // 防止敌人死亡后目标消失报错
         {
             attackTarget = target;
+            characterStats.isCritical = Random.value < characterStats.attackData.criticalChance;
             StartCoroutine(MoveToAttackTarget());
         }
     }
@@ -75,10 +76,18 @@ public class PlayerController : MonoBehaviour
         // Attack
         if (lastAttackTime < 0)
         {
+            anim.SetBool("critical", characterStats.isCritical);
             anim.SetTrigger("attack");
             // 重置冷却时间
-            lastAttackTime = 0.5f;
+            lastAttackTime = characterStats.attackData.coolDown;
         }
 
+    }
+
+    // Animation Event
+    void Hit()
+    {
+        var targetStats = attackTarget.GetComponent<CharacterStats>();
+        targetStats.TakeDamage(characterStats, targetStats);
     }
 }

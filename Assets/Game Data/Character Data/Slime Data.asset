@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d17a14f86fbb0b343ab80d843abb5c17, type: 3}
   m_Name: Slime Data
   m_EditorClassIdentifier: 
-  maxHealth: 20
-  currentHealth: 20
-  baseDefence: 2
-  currentDefence: 2
+  MaxHealth: 20
+  CurrentHealth: 0
+  BaseDefence: 2
+  CurrentDefence: 2

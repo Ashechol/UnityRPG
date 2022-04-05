@@ -40,9 +40,11 @@ using UnityEngine;
 public class CharacterData_SO : ScriptableObject
 {
     [Header("State Info")]
-    public int maxHealth;
-    public int currentHealth;
-    public int baseDefence;
-    public int currentDefence;
+    public int MaxHealth;
+    public int CurrentHealth;
+    public int BaseDefence;
+    public int CurrentDefence;
 }
 ```
+
+* Vector3.Distance() 和 Vector3.SqrMagnitude()，后者的开销较少

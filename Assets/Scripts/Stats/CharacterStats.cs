@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
@@ -11,64 +10,94 @@ public class CharacterStats : MonoBehaviour
     public bool isCritical;
 
     #region Read from Data_SO
-    public int maxHealth // properties
+    public int MaxHealth // properties
     {
         get
         {
             if (characterData != null)
-                return characterData.maxHealth;
+                return characterData.MaxHealth;
             else
                 return 0;
         }
         set
         {
-            characterData.maxHealth = value;
+            characterData.MaxHealth = value;
         }
     }
 
-    public int currentHealth // properties
+    public int CurrentHealth // properties
     {
         get
         {
             if (characterData != null)
-                return characterData.currentHealth;
+                return characterData.CurrentHealth;
             else
                 return 0;
         }
         set
         {
-            characterData.currentHealth = value;
+            characterData.CurrentHealth = value;
         }
     }
 
-    public int baseDefence // properties
+    public int BaseDefence // properties
     {
         get
         {
             if (characterData != null)
-                return characterData.baseDefence;
+                return characterData.BaseDefence;
             else
                 return 0;
         }
         set
         {
-            characterData.baseDefence = value;
+            characterData.BaseDefence = value;
         }
     }
 
-    public int currentDefence // properties
+    public int CurrentDefence // properties
     {
         get
         {
             if (characterData != null)
-                return characterData.currentDefence;
+                return characterData.CurrentDefence;
             else
                 return 0;
         }
         set
         {
-            characterData.currentDefence = value;
+            characterData.CurrentDefence = value;
         }
+    }
+
+    #endregion
+
+    #region Character Combat
+
+    public void TakeDamage(CharacterStats attacker, CharacterStats defener)
+    {
+        int damage = Mathf.Max(attacker.CurrentDamage() - defener.CurrentDefence, 1);
+        CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
+
+        if (attacker.isCritical)  // 攻击者暴击
+        {
+            defener.GetComponent<Animator>().SetTrigger("hit");
+        }
+        //TODO: Update UI
+        //TODO: Level Up
+    }
+
+    private int CurrentDamage()
+    {
+        float coreDamage = Random.Range(attackData.minDamage, attackData.maxDamage);
+
+        if (isCritical)
+        {
+            coreDamage *= attackData.criticalMultiplier;
+            // Debug.Log("Critical Attack!" + coreDamage);
+        }
+
+        return (int)coreDamage;
     }
 
     #endregion
