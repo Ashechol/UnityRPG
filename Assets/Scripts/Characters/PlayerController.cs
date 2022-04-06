@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-
 public class PlayerController : MonoBehaviour
 {
     private NavMeshAgent agent;
@@ -21,8 +20,10 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        MouseManager.Instance.OnMouseClicked += MoveToTarget;
-        MouseManager.Instance.OnEnemyClicked += EventAttack;
+        MouseManager.OnMouseClicked += MoveToTarget;
+        MouseManager.OnEnemyClicked += EventAttack;
+
+        GameManager.RegisterPlayer(characterStats);
     }
 
 

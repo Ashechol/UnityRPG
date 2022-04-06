@@ -47,4 +47,4 @@ public class CharacterData_SO : ScriptableObject
 }
 ```
 
-* Vector3.Distance() 和 Vector3.SqrMagnitude()，后者的开销较少
+Vector3.Distance() 和 Vector3.SqrMagnitude()，后者的开销较少

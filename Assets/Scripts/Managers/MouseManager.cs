@@ -6,22 +6,18 @@ using System;
 
 // [System.Serializable]  // 显示在 Inspector 窗口
 // public class EventsVector3 : UnityEvent<Vector3> {}
-public class MouseManager : MonoBehaviour
+public class MouseManager : Singleton<MouseManager>  // 继承单例模式
 {
-    public static MouseManager Instance;  // 生成单例模式
-
     public Texture2D point, doorway, attack, target, arrow;
     RaycastHit hitInfo;  // 保存射线碰撞到物体的信息
 
-    public event Action<Vector3> OnMouseClicked;
-    public event Action<GameObject> OnEnemyClicked;
+    public static event Action<Vector3> OnMouseClicked;
+    public static event Action<GameObject> OnEnemyClicked;
 
-    void Awake()
+    protected override void Awake()
     {
-        if (Instance != null)
-            Destroy(gameObject);
-
-        Instance = this;
+        base.Awake();
+        // DontDestroyOnLoad(this);
     }
 
     void Update()
@@ -33,6 +29,7 @@ public class MouseManager : MonoBehaviour
     // 设置鼠标贴图
     void SetCursorTexture()
     {
+        // 2020版之前直接在update调用 camera.main 开销大
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hitInfo))
