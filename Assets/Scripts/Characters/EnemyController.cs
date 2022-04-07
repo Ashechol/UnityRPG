@@ -5,7 +5,7 @@ public enum EnemyStates { GUARD, PATROL, CHASE, DEAD }
 
 [RequireComponent(typeof(NavMeshAgent))]
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IEndGameObserver
 {
     private EnemyStates enemyStates;
     private NavMeshAgent agent;
@@ -14,9 +14,12 @@ public class EnemyController : MonoBehaviour
     private Collider coll;
     private CharacterStats characterStats;
     private bool isWalk, isFollow, isChase, isHit, isDead;
+    private bool playerDead;
     private float speed;
     private Vector3 guardPos;
     private Quaternion guardRotation;  // Unity中记录旋转信息的是四元数
+
+    public bool IsDead { set { isDead = value; } }
 
     [Header("Basic Settings")]
     public float sightRadius;
@@ -49,14 +52,29 @@ public class EnemyController : MonoBehaviour
             enemyStates = EnemyStates.PATROL;
             GetNewWayPoint();
         }
+
+        //FIXME: 场景切换后修改
+        GameManager.Instance.AddObserver(this);
     }
+
+    // void OnEnable()
+    // {
+    //     GameManager.Instance.AddObserver(this);
+    // }
+    void OnDisable()
+    {
+        if (!GameManager.IsInit) return;
+        GameManager.Instance.RemoveObserver(this);
+    }
+
     void Update()
     {
-        if (characterStats.CurrentHealth == 0)
-            isDead = true;
-        SwitchStates();
-        SwitchAnimation();
-        lastAttackTime -= Time.deltaTime;
+        if (!playerDead)
+        {
+            SwitchStates();
+            SwitchAnimation();
+            lastAttackTime -= Time.deltaTime;
+        }
     }
 
     void SwitchStates()
@@ -251,5 +269,17 @@ public class EnemyController : MonoBehaviour
             var targetStats = attackTarget.GetComponent<CharacterStats>();
             targetStats.TakeDamage(characterStats, targetStats);
         }
+    }
+
+    public void EndNotify()
+    {
+        // 获胜动画
+        // 停止移动
+        // 停止Agent
+        playerDead = true;
+        isChase = false;
+        isWalk = false;
+        attackTarget = null;
+        anim.SetBool("win", true);
     }
 }

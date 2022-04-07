@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private float lastAttackTime;
     private bool isDead;
 
+    public bool IsDead { set { isDead = value; } }
+
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -29,7 +31,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        isDead = characterStats.CurrentHealth == 0;
         SwitchAnimation();
         lastAttackTime -= Time.deltaTime;
     }

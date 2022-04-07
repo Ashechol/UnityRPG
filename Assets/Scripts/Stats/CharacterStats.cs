@@ -79,6 +79,21 @@ public class CharacterStats : MonoBehaviour
         int damage = Mathf.Max(attacker.CurrentDamage() - defener.CurrentDefence, 1);
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
 
+        bool isdead = (CurrentHealth == 0);
+        if (isdead)
+        {
+            if (CompareTag("Player"))
+            {
+                GetComponentInParent<PlayerController>().IsDead = isdead;
+                GameManager.Instance.NotifyObservers();
+            }
+
+            if (CompareTag("Enemy"))
+            {
+                GetComponentInParent<EnemyController>().IsDead = isdead;
+            }
+        }
+
         if (attacker.isCritical)  // 攻击者暴击
         {
             defener.GetComponent<Animator>().SetTrigger("hit");
