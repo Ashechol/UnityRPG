@@ -20,10 +20,10 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        MouseManager.OnMouseClicked += MoveToTarget;
-        MouseManager.OnEnemyClicked += EventAttack;
+        MouseManager.Instance.OnMouseClicked += MoveToTarget;
+        MouseManager.Instance.OnEnemyClicked += EventAttack;
 
-        GameManager.RegisterPlayer(characterStats);
+        GameManager.Instance.RegisterPlayer(characterStats);
     }
 
 
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
                        transform.position) > characterStats.attackData.attackRange)
         {
             agent.destination = attackTarget.transform.position;
-            yield return null;  // yield return 暂时挂起，下一帧继续执行协程
+            yield return null;  // yield return 暂时挂起，下一帧继续从这里开始执行协程
         }
 
         agent.isStopped = true;

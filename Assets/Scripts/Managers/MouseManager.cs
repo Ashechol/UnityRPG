@@ -11,8 +11,10 @@ public class MouseManager : Singleton<MouseManager>  // 继承单例模式
     public Texture2D point, doorway, attack, target, arrow;
     RaycastHit hitInfo;  // 保存射线碰撞到物体的信息
 
-    public static event Action<Vector3> OnMouseClicked;
-    public static event Action<GameObject> OnEnemyClicked;
+    // public delegate void OnAction(Vecter3 obj)
+    // public event OnAction OnMouseClicked;
+    public event Action<Vector3> OnMouseClicked;
+    public event Action<GameObject> OnEnemyClicked;
 
     protected override void Awake()
     {
