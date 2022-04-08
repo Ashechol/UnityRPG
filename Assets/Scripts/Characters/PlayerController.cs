@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        // += 多播委托：一个委托代表多个方法
+        // 将方法订阅到事件
         MouseManager.Instance.OnMouseClicked += MoveToTarget;
         MouseManager.Instance.OnEnemyClicked += EventAttack;
 
