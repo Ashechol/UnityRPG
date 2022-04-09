@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public enum EnemyStates { GUARD, PATROL, CHASE, DEAD }
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(CharacterStats))]
 
 public class EnemyController : MonoBehaviour, IEndGameObserver
 {
@@ -57,6 +58,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         GameManager.Instance.AddObserver(this);
     }
 
+    // 切换场景启用
     // void OnEnable()
     // {
     //     GameManager.Instance.AddObserver(this);

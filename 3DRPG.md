@@ -18,6 +18,8 @@ cinemachine：摄像机
 
 * FreeLook Camera：可以实现类似星际争霸摄像机的效果
 
+animator override controller：可以直接在其他animator的基础上进行覆盖动画，从而快速构建类似角色的animator
+
 #### URP
 
 post processing：URP 的后期处理，在 Hierarchy --> Volume 中创建

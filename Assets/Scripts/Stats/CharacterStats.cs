@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    public CharacterData_SO templeteData;
     public CharacterData_SO characterData;
     public AttackData_SO attackData;
 
@@ -71,6 +72,14 @@ public class CharacterStats : MonoBehaviour
     }
 
     #endregion
+
+    void Awake()
+    {
+        if (templeteData != null)
+        {
+            characterData = Instantiate(templeteData);
+        }
+    }
 
     #region Character Combat
 

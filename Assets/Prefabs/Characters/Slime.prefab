@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4655055895001990319}
   - component: {fileID: 7849317273585894719}
-  - component: {fileID: 6437538568076338379}
+  - component: {fileID: 384894989}
   - component: {fileID: 3122442527218432747}
   - component: {fileID: 3609078386505607218}
   - component: {fileID: 4070917689914115235}
@@ -56,8 +56,8 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &6437538568076338379
-BoxCollider:
+--- !u!136 &384894989
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -66,9 +66,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Radius: 0.5451931
+  m_Height: 1.0903862
+  m_Direction: 1
+  m_Center: {x: 0.009967386, y: 0.43779665, z: 0.018642545}
 --- !u!195 &3122442527218432747
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -104,8 +105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sightRadius: 6
-  isGuard: 0
-  lookAtTime: 3
+  isGuard: 1
+  lookAtTime: 2
   patrolRange: 5
   wayPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &4070917689914115235
@@ -120,7 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119f543564a3ecf4e91b2e3852c9aa88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterData: {fileID: 11400000, guid: ef6b90f9631d03e44935be3b23f07f79, type: 2}
+  templeteData: {fileID: 11400000, guid: ef6b90f9631d03e44935be3b23f07f79, type: 2}
+  characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: 6bdeae1f92fc7fb4ea1842287c3a6078, type: 2}
   isCritical: 0
 --- !u!1 &4650196707220931221

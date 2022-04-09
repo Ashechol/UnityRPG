@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private NavMeshAgent agent;
     public Animator anim;
+    public CapsuleCollider capColl;
     public CharacterStats characterStats;
     private GameObject attackTarget;
     private float lastAttackTime;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         characterStats = GetComponent<CharacterStats>();
+        capColl = GetComponent<CapsuleCollider>();
     }
 
     void Start()
@@ -48,12 +50,15 @@ public class PlayerController : MonoBehaviour
     public void MoveToTarget(Vector3 target)
     {
         StopAllCoroutines(); // 停止其他协程
+        if (isDead) return;
         agent.isStopped = false;
         agent.destination = target;
     }
 
     private void EventAttack(GameObject target)
     {
+        if (isDead) return;
+
         if (target != null)  // 防止敌人死亡后目标消失报错
         {
             attackTarget = target;
@@ -62,6 +67,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Coroutine
     IEnumerator MoveToAttackTarget()
     {
         agent.isStopped = false;

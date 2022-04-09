@@ -1836,6 +1836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  capColl: {fileID: 0}
   characterStats: {fileID: 0}
 --- !u!114 &4985226379352317666
 MonoBehaviour:
@@ -1849,7 +1850,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119f543564a3ecf4e91b2e3852c9aa88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterData: {fileID: 11400000, guid: c66807ed3e99a6845b8e20a240efc73c, type: 2}
+  templeteData: {fileID: 11400000, guid: c66807ed3e99a6845b8e20a240efc73c, type: 2}
+  characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: 06ee8c8cd71b3fc4fb5e673ccd5f4c63, type: 2}
   isCritical: 0
 --- !u!1 &6449158702150135739
