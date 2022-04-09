@@ -74,8 +74,8 @@ GameObject:
   - component: {fileID: 2047368964}
   - component: {fileID: 8573968518096542544}
   - component: {fileID: 2047368967}
-  - component: {fileID: 2047368966}
   - component: {fileID: 2047368965}
+  - component: {fileID: 2047368966}
   m_Layer: 7
   m_Name: Grunt
   m_TagString: Enemy
@@ -148,12 +148,31 @@ NavMeshAgent:
   m_AngularSpeed: 800
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2047368965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2955734188466599201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 721126a188875554db5319d5601abe96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sightRadius: 8
+  sightAngle: 50
+  isGuard: 1
+  lookAtTime: 3
+  patrolRange: 5
+  wayPoint: {x: 0, y: 0, z: 0}
+  kickForce: 20
 --- !u!114 &2047368966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,23 +189,6 @@ MonoBehaviour:
   characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: 3e62c9951e427714b8d3621d48fb4037, type: 2}
   isCritical: 0
---- !u!114 &2047368965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2955734188466599201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 721126a188875554db5319d5601abe96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sightRadius: 8
-  isGuard: 0
-  lookAtTime: 3
-  patrolRange: 5
-  wayPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &2955734188575828177
 GameObject:
   m_ObjectHideFlags: 0

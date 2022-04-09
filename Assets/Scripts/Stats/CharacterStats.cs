@@ -89,6 +89,10 @@ public class CharacterStats : MonoBehaviour
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
 
         bool isdead = (CurrentHealth == 0);
+
+        if (CompareTag("Enemy"))
+            GetComponent<Transform>().LookAt(attacker.GetComponent<Transform>());
+
         if (isdead)
         {
             if (CompareTag("Player"))

@@ -260,6 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sightRadius: 5
+  sightAngle: 25
   isGuard: 0
   lookAtTime: 3
   patrolRange: 3

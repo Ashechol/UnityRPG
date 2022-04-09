@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
-
+using Utils;
 public enum EnemyStates { GUARD, PATROL, CHASE, DEAD }
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -24,6 +24,9 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
 
     [Header("Basic Settings")]
     public float sightRadius;
+    [Range(0, 180)]
+    public float sightAngle;
+    private float attackSightAngle;
     public bool isGuard;
     public float lookAtTime;
     private float remainLookAtTime;
@@ -42,6 +45,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         speed = agent.speed;
         guardPos = transform.position;
         guardRotation = transform.rotation;
+        attackSightAngle = sightAngle;
     }
 
     void Start()
@@ -108,6 +112,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
                         isWalk = false;
                 }
                 break;
+
             case EnemyStates.PATROL:
                 isChase = false;
                 agent.speed = speed * 0.6f;
@@ -127,15 +132,18 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
                 }
 
                 break;
+
             case EnemyStates.CHASE:
                 agent.speed = speed;
                 isWalk = false;
                 isChase = true;
-                //TODO: 做一个走出区域脱战
+                attackSightAngle = 180;  //  追击中视野变大，防止被绕后脱离
+
                 if (!FoundPlayer())
                 {
-                    isFollow = false;
                     // 脱战停止追击
+                    attackSightAngle = sightAngle;  // 恢复正常视野范围
+                    isFollow = false;
                     if (remainLookAtTime > 0)
                     {
                         agent.destination = transform.position;
@@ -197,7 +205,8 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
 
         foreach (var target in colliders)
         {
-            if (target.CompareTag("Player"))
+            if (target.CompareTag("Player") &&
+                transform.IsFacingTarget(target.transform, attackSightAngle))
             {
                 attackTarget = target.gameObject;
                 return true;
@@ -260,18 +269,20 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.blue;
-        //TODO: 绘制扇形
+        // Gizmos.color = Color.green;
         // Gizmos.DrawWireSphere(transform.position, sightRadius);
-        // Gizmos.
+        // 绘制视野扇形
+        GizmosEx.DrawWireArc(transform, sightRadius, sightAngle, Color.green);
+        GizmosEx.DrawWireArc(transform, sightRadius, attackSightAngle, Color.red);
     }
 
     // Animation Event
     void Hit()
     {
         // 防止攻击时目标走出范围报错; 判断玩家是否走到背后
-        if (attackTarget != null && transform.IsFacingTarget(attackTarget.transform))
+        if (attackTarget != null && transform.IsFacingTarget(attackTarget.transform, Mathf.Cos(sightAngle)))
         {
+            Debug.Log("player!");
             var targetStats = attackTarget.GetComponent<CharacterStats>();
             targetStats.TakeDamage(characterStats, targetStats);
         }
