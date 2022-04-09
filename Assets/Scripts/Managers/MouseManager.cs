@@ -52,7 +52,7 @@ public class MouseManager : Singleton<MouseManager>  // 继承单例模式
     void MouseControl()
     {
         // GetMouseButtonDown 0 是鼠标左键
-        if (Input.GetMouseButtonDown(1) && hitInfo.collider != null)
+        if (Input.GetMouseButton(1) && hitInfo.collider != null)
         {
             if (hitInfo.collider.gameObject.CompareTag("Ground"))
                 OnMouseClicked?.Invoke(hitInfo.point);

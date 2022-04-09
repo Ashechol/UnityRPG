@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
 {
     private EnemyStates enemyStates;
     private NavMeshAgent agent;
-    private GameObject attackTarget;
+    protected GameObject attackTarget;
     private Animator anim;
     private Collider coll;
     private CharacterStats characterStats;
@@ -175,7 +175,8 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
                 break;
             case EnemyStates.DEAD:
                 coll.enabled = false;
-                agent.enabled = false;  // 关闭 Agent 防止死亡后继续移动和攻击
+                // agent.enabled = false;  // 关闭 Agent 防止死亡后继续移动和攻击
+                agent.radius = 0;
                 Destroy(gameObject, 2f);
                 break;
         }
@@ -260,13 +261,16 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, sightRadius);
+        //TODO: 绘制扇形
+        // Gizmos.DrawWireSphere(transform.position, sightRadius);
+        // Gizmos.
     }
 
     // Animation Event
     void Hit()
     {
-        if (attackTarget != null)  // 防止攻击时目标走出范围报错
+        // 防止攻击时目标走出范围报错; 判断玩家是否走到背后
+        if (attackTarget != null && transform.IsFacingTarget(attackTarget.transform))
         {
             var targetStats = attackTarget.GetComponent<CharacterStats>();
             targetStats.TakeDamage(characterStats, targetStats);

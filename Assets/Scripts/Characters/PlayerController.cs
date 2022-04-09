@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour
         if (target != null)  // 防止敌人死亡后目标消失报错
         {
             attackTarget = target;
-            characterStats.isCritical = Random.value < characterStats.attackData.criticalChance;
             StartCoroutine(MoveToAttackTarget());
         }
     }
@@ -86,6 +85,7 @@ public class PlayerController : MonoBehaviour
         // Attack
         if (lastAttackTime < 0)
         {
+            characterStats.isCritical = Random.value < characterStats.attackData.criticalChance;
             anim.SetBool("critical", characterStats.isCritical);
             anim.SetTrigger("attack");
             // 重置冷却时间

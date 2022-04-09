@@ -18,7 +18,7 @@ cinemachine：摄像机
 
 * FreeLook Camera：可以实现类似星际争霸摄像机的效果
 
-animator override controller：可以直接在其他animator的基础上进行覆盖动画，从而快速构建类似角色的animator
+animator override controller：可以直接在其他animator的基础上进行覆盖动画，从而快速构建类似角色的animation behavior：用于在动画播放自定义各种功能
 
 #### URP
 

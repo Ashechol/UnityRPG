@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sightRadius: 5
-  isGuard: 1
+  isGuard: 0
   lookAtTime: 3
   patrolRange: 3
   wayPoint: {x: 0, y: 0, z: 0}
