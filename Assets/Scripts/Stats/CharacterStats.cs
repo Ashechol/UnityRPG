@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class CharacterStats : MonoBehaviour
 {
@@ -83,15 +84,23 @@ public class CharacterStats : MonoBehaviour
 
     #region Character Combat
 
-    public void TakeDamage(CharacterStats attacker, CharacterStats defener)
+    //TODO: 代码内部结构优化
+    // 伤害计算
+    public void TakeDamage(CharacterStats attacker)
     {
-        int damage = Mathf.Max(attacker.CurrentDamage() - defener.CurrentDefence, 1);
+        int damage = Mathf.Max(attacker.CurrentDamage() - CurrentDefence, 1);
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
 
         bool isdead = (CurrentHealth == 0);
 
         if (CompareTag("Enemy"))
+        {
             GetComponent<Transform>().LookAt(attacker.GetComponent<Transform>());
+
+            // if (!GetComponentInChildren<VisualEffect>().enabled)
+            //     GetComponentInChildren<VisualEffect>().enabled = true;
+            // GetComponentInChildren<VisualEffect>().Play();
+        }
 
         if (isdead)
         {
@@ -109,8 +118,9 @@ public class CharacterStats : MonoBehaviour
 
         if (attacker.isCritical)  // 攻击者暴击
         {
-            defener.GetComponent<Animator>().SetTrigger("hit");
+            GetComponent<Animator>().SetTrigger("hit");
         }
+
         //TODO: Update UI
         //TODO: Level Up
     }

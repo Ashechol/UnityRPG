@@ -13,7 +13,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     protected GameObject attackTarget;
     private Animator anim;
     private Collider coll;
-    private CharacterStats characterStats;
+    protected CharacterStats characterStats;
     private bool isWalk, isFollow, isChase, isHit, isDead;
     private bool playerDead;
     private float speed;
@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     public float sightRadius;
     [Range(0, 180)]
     public float sightAngle;
-    private float attackSightAngle;
+    private float chaseSightAngle;
     public bool isGuard;
     public float lookAtTime;
     private float remainLookAtTime;
@@ -36,7 +36,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     public float patrolRange;
     public Vector3 wayPoint;
 
-    void Awake()
+    protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
@@ -45,10 +45,10 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         speed = agent.speed;
         guardPos = transform.position;
         guardRotation = transform.rotation;
-        attackSightAngle = sightAngle;
+        chaseSightAngle = sightAngle;
     }
 
-    void Start()
+    protected virtual void Start()
     {
         if (isGuard)
             enemyStates = EnemyStates.GUARD;
@@ -87,12 +87,8 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     {
         if (isDead)
             enemyStates = EnemyStates.DEAD;
-
         else if (FoundPlayer())
-        {
             enemyStates = EnemyStates.CHASE;
-            // Debug.Log("Player Found!");
-        }
 
         switch (enemyStates)
         {
@@ -137,12 +133,12 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
                 agent.speed = speed;
                 isWalk = false;
                 isChase = true;
-                attackSightAngle = 180;  //  追击中视野变大，防止被绕后脱离
+                chaseSightAngle = 180;  //  追击中视野变大，防止被绕后脱离
 
                 if (!FoundPlayer())
                 {
                     // 脱战停止追击
-                    attackSightAngle = sightAngle;  // 恢复正常视野范围
+                    chaseSightAngle = sightAngle;  // 恢复正常视野范围
                     isFollow = false;
                     if (remainLookAtTime > 0)
                     {
@@ -206,7 +202,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         foreach (var target in colliders)
         {
             if (target.CompareTag("Player") &&
-                transform.IsFacingTarget(target.transform, attackSightAngle))
+                transform.IsFacingTarget(target.transform, chaseSightAngle))
             {
                 attackTarget = target.gameObject;
                 return true;
@@ -273,18 +269,18 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         // Gizmos.DrawWireSphere(transform.position, sightRadius);
         // 绘制视野扇形
         GizmosEx.DrawWireArc(transform, sightRadius, sightAngle, Color.green);
-        GizmosEx.DrawWireArc(transform, sightRadius, attackSightAngle, Color.red);
+        GizmosEx.DrawWireArc(transform, sightRadius, chaseSightAngle, Color.red);
     }
 
     // Animation Event
     void Hit()
     {
         // 防止攻击时目标走出范围报错; 判断玩家是否走到背后
-        if (attackTarget != null && transform.IsFacingTarget(attackTarget.transform, Mathf.Cos(sightAngle)))
+        if (attackTarget != null && transform.IsFacingTarget(attackTarget.transform, sightAngle))
         {
-            Debug.Log("player!");
+            // Debug.Log("player!");
             var targetStats = attackTarget.GetComponent<CharacterStats>();
-            targetStats.TakeDamage(characterStats, targetStats);
+            targetStats.TakeDamage(characterStats);
         }
     }
 
