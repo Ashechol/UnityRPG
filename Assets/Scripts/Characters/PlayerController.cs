@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public CharacterStats characterStats;
     private GameObject attackTarget;
     private float lastAttackTime;
+    private float stopDistance;
     private bool isDead;
 
     public bool IsDead { set { isDead = value; } }
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         characterStats = GetComponent<CharacterStats>();
         capColl = GetComponent<CapsuleCollider>();
+        stopDistance = agent.stoppingDistance;
     }
 
     void Start()
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
         if (isDead) return;
         agent.isStopped = false;
         agent.destination = target;
+        agent.stoppingDistance = stopDistance;  // 正常移动不需要按照攻击距离判断
     }
 
     private void EventAttack(GameObject target)
@@ -70,6 +73,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator MoveToAttackTarget()
     {
         agent.isStopped = false;
+        agent.stoppingDistance = characterStats.attackData.attackRange;  // 停止距离变为攻击距离，防止被体形大的敌人阻挡
 
         transform.LookAt(attackTarget.transform);
 

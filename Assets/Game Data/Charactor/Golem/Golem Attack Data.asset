@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Golem Attack Data
   m_EditorClassIdentifier: 
   attackRange: 3
-  skillRange: 0
+  skillRange: 10
   coolDown: 3.5
   minDamage: 10
   maxDamage: 20
