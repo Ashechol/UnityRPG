@@ -6,14 +6,18 @@ public class Rock : MonoBehaviour
 {
     private Rigidbody rb;
     private Vector3 direction;
-
-    [Header("Basic Settings")]
     public float force;
     public GameObject target;
+
+    // void OnEnable()
+    // {
+    //     rb = GetComponent<Rigidbody>();
+    // }
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        FlyToTarget();
     }
 
     public void FlyToTarget()

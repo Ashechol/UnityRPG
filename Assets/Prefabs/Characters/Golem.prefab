@@ -739,8 +739,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.1896896, y: 4.1380677, z: 1.7328829}
-  m_Center: {x: -0.0458951, y: 2.0243542, z: 0.2300328}
+  m_Size: {x: 2.1896896, y: 3.74485, z: 1.8600149}
+  m_Center: {x: -0.0458951, y: 1.8277456, z: 0.16832447}
 --- !u!95 &5707949820722400364
 Animator:
   serializedVersion: 3
@@ -769,7 +769,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 4723024255851807341}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 2
+  m_Radius: 1.4
   m_Speed: 1.5
   m_Acceleration: 50
   avoidancePriority: 50
@@ -801,6 +801,8 @@ MonoBehaviour:
   patrolRange: 0
   wayPoint: {x: 0, y: 0, z: 0}
   kickForce: 25
+  rockPrefab: {fileID: 3568734821334489020, guid: 9583dad449e3cb241b070d1a4ff26e5d, type: 3}
+  handPos: {fileID: 4723024255579533577}
 --- !u!114 &7442479907020307817
 MonoBehaviour:
   m_ObjectHideFlags: 0

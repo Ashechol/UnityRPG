@@ -7,6 +7,7 @@ public class Golem : EnemyController
 {
     [Header("Skill")]
     public float kickForce = 25;
+    public float throwForce = 30;
     public GameObject rockPrefab;
     public Transform handPos;
 
@@ -29,11 +30,13 @@ public class Golem : EnemyController
     // Animation Event
     public void ThrowRock()
     {
-        if (attackTarget != null)
-        {
-            var rock = Instantiate(rockPrefab, handPos.position, Quaternion.identity);
-            rock.GetComponent<Rock>().target = attackTarget;
-        }
+        if (attackTarget == null)
+            attackTarget = FindObjectOfType<PlayerController>().gameObject;
+
+        var rock = Instantiate(rockPrefab, handPos.position, Quaternion.identity);
+        rock.GetComponent<Rock>().target = attackTarget;
+        rock.GetComponent<Rock>().force = throwForce;
+        // rock.GetComponent<Rock>().FlyToTarget();
     }
 
 }
