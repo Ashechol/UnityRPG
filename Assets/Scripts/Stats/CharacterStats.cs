@@ -72,6 +72,33 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
+    public int Damage
+    {
+        get
+        {
+            float coreDamage = Random.Range(attackData.minDamage,
+                                  attackData.maxDamage);
+            if (isCritical)
+                coreDamage *= attackData.criticalMultiplier;
+
+            return (int)coreDamage;
+        }
+    }
+
+    public int SkillDamage
+    {
+        get
+        {
+            float coreDamage = Random.Range(attackData.skillMinDamage,
+                                  attackData.skillMaxDamage);
+
+            if (isCritical)
+                coreDamage *= attackData.criticalMultiplier;
+
+            return (int)coreDamage;
+        }
+    }
+
     #endregion
 
     void Awake()
@@ -88,13 +115,14 @@ public class CharacterStats : MonoBehaviour
     // 伤害计算
     public void TakeDamage(CharacterStats attacker)
     {
-        int damage = Mathf.Max(attacker.CurrentDamage() - CurrentDefence, 1);
+        int damage = Mathf.Max(attacker.Damage - CurrentDefence, 1);
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
 
         bool isdead = (CurrentHealth == 0);
 
         if (CompareTag("Enemy"))
         {
+            //FIXME: 只在第一被偷袭看向玩家
             GetComponent<Transform>().LookAt(attacker.GetComponent<Transform>());
 
             // if (!GetComponentInChildren<VisualEffect>().enabled)
@@ -106,13 +134,13 @@ public class CharacterStats : MonoBehaviour
         {
             if (CompareTag("Player"))
             {
-                GetComponentInParent<PlayerController>().IsDead = isdead;
+                GetComponent<PlayerController>().IsDead = isdead;
                 GameManager.Instance.NotifyObservers();
             }
 
             if (CompareTag("Enemy"))
             {
-                GetComponentInParent<EnemyController>().IsDead = isdead;
+                GetComponent<EnemyController>().IsDead = isdead;
             }
         }
 
@@ -125,18 +153,41 @@ public class CharacterStats : MonoBehaviour
         //TODO: Level Up
     }
 
-    private int CurrentDamage()
+    public void TakeDamage(int damage)
     {
-        float coreDamage = Random.Range(attackData.minDamage, attackData.maxDamage);
+        damage = Mathf.Max(damage - CurrentDefence, 1);
+        CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
 
-        if (isCritical)
+        bool isdead = (CurrentHealth == 0);
+
+        if (isdead)
         {
-            coreDamage *= attackData.criticalMultiplier;
-            // Debug.Log("Critical Attack!" + coreDamage);
-        }
+            if (CompareTag("Player"))
+            {
+                GetComponent<PlayerController>().IsDead = isdead;
+                GameManager.Instance.NotifyObservers();
+            }
 
-        return (int)coreDamage;
+            if (CompareTag("Enemy"))
+            {
+                GetComponent<EnemyController>().IsDead = isdead;
+            }
+        }
     }
+
+    // 使用属性即刻更简洁实现下列功能
+    // private int CurrentDamage()
+    // {
+    //     float coreDamage = Random.Range(attackData.minDamage, attackData.maxDamage);
+
+    //     if (isCritical)
+    //     {
+    //         coreDamage *= attackData.criticalMultiplier;
+    //         // Debug.Log("Critical Attack!" + coreDamage);
+    //     }
+
+    //     return (int)coreDamage;
+    // }
 
     #endregion
 

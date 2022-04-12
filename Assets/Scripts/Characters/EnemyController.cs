@@ -113,7 +113,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
                 isChase = false;
                 agent.speed = speed * 0.6f;
 
-                if (Vector3.Distance(wayPoint, transform.position) <= agent.stoppingDistance)
+                if (Vector3.SqrMagnitude(wayPoint - transform.position) <= agent.stoppingDistance)
                 {
                     isWalk = false;
                     if (remainLookAtTime > 0)

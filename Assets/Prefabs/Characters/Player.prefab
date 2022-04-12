@@ -208,7 +208,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6449158702150135371}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6449158702149710809}
@@ -1740,6 +1740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6449158702149710809}
   - component: {fileID: 1521936091}
+  - component: {fileID: 538670689682348604}
   - component: {fileID: 6449158702142741509}
   - component: {fileID: 4985226379436609648}
   - component: {fileID: 4985226379436609651}
@@ -1782,6 +1783,22 @@ CapsuleCollider:
   m_Height: 1.4
   m_Direction: 1
   m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!54 &538670689682348604
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6449158702150135737}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!95 &6449158702142741509
 Animator:
   serializedVersion: 3
@@ -1838,6 +1855,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   capColl: {fileID: 0}
   characterStats: {fileID: 0}
+  hitForce: 20
 --- !u!114 &4985226379352317666
 MonoBehaviour:
   m_ObjectHideFlags: 0

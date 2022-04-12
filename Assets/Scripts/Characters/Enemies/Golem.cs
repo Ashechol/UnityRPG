@@ -34,9 +34,9 @@ public class Golem : EnemyController
             attackTarget = FindObjectOfType<PlayerController>().gameObject;
 
         var rock = Instantiate(rockPrefab, handPos.position, Quaternion.identity);
-        rock.GetComponent<Rock>().target = attackTarget;
-        rock.GetComponent<Rock>().force = throwForce;
-        // rock.GetComponent<Rock>().FlyToTarget();
+        // rock.GetComponent<Rock>().target = attackTarget;
+        // rock.GetComponent<Rock>().force = throwForce;
+        rock.GetComponent<Rock>().FlyToTarget(characterStats.SkillDamage, attackTarget, throwForce);
     }
 
 }

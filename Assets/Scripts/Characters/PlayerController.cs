@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public Animator anim;
     public CapsuleCollider capColl;
     public CharacterStats characterStats;
+    public float hitForce = 20;
     private GameObject attackTarget;
     private float lastAttackTime;
     private float stopDistance;
@@ -70,6 +71,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Coroutine
+    //TODO: 优化代码结构
     IEnumerator MoveToAttackTarget()
     {
         agent.isStopped = false;
@@ -77,12 +79,22 @@ public class PlayerController : MonoBehaviour
 
         transform.LookAt(attackTarget.transform);
 
-        while (Vector3.Distance(attackTarget.transform.position,
-                       transform.position) > characterStats.attackData.attackRange)
+        if (attackTarget.CompareTag("Attackable"))
         {
-            agent.destination = attackTarget.transform.position;
-            yield return null;  // yield return 暂时挂起，下一帧继续从这里开始执行协程
+            var closestPoint = attackTarget.GetComponent<Collider>().bounds.ClosestPoint(transform.position);
+            while (Vector3.Distance(closestPoint, transform.position) > 1)
+            {
+                agent.destination = attackTarget.transform.position;
+                yield return null;  // yield return 暂时挂起，下一帧继续从这里开始执行协程
+            }
         }
+        else
+            while (Vector3.Distance(attackTarget.transform.position,
+                           transform.position) > characterStats.attackData.attackRange)
+            {
+                agent.destination = attackTarget.transform.position;
+                yield return null;  // yield return 暂时挂起，下一帧继续从这里开始执行协程
+            }
 
         agent.isStopped = true;
 
@@ -101,7 +113,22 @@ public class PlayerController : MonoBehaviour
     // Animation Event
     void Hit()
     {
-        var targetStats = attackTarget.GetComponent<CharacterStats>();
-        targetStats.TakeDamage(characterStats);
+        if (attackTarget.CompareTag("Enemy"))
+        {
+            var targetStats = attackTarget.GetComponent<CharacterStats>();
+            targetStats.TakeDamage(characterStats);
+        }
+
+        if (attackTarget.CompareTag("Attackable"))
+        {
+            if (attackTarget.GetComponent<Rock>())
+            {
+                attackTarget.GetComponent<Rock>().rockStates = Rock.RockStates.HitEnemy;
+                attackTarget.GetComponent<Rigidbody>().velocity = Vector3.one;
+                attackTarget.GetComponent<Rigidbody>().AddForce(transform.forward *
+                                                                hitForce, ForceMode.Impulse);
+                attackTarget.tag = "Ground";
+            }
+        }
     }
 }

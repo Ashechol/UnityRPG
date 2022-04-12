@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ExtensionMethod
+public static class Utilities
 {
     public static bool IsFacingTarget(this Transform transform, Transform target, float angle = 30)
     {
