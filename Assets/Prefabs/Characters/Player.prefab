@@ -1855,7 +1855,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   capColl: {fileID: 0}
   characterStats: {fileID: 0}
-  hitForce: 20
+  hitForce: 10
 --- !u!114 &4985226379352317666
 MonoBehaviour:
   m_ObjectHideFlags: 0
