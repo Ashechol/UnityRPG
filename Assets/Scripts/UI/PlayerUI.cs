@@ -21,6 +21,7 @@ public class PlayerUI : MonoBehaviour
 
     void Update()
     {
+        //FIXME: 优化？
         if (playerStats == null)
             playerStats = GameManager.Instance.playerStats;
         level.text = "Level " + playerStats.CurrentLevel.ToString("00");
@@ -31,10 +32,12 @@ public class PlayerUI : MonoBehaviour
     void UpdateHealth()
     {
         float sliderPercent = (float)playerStats.CurrentHealth / playerStats.MaxHealth;
+        healthSlider.fillAmount = sliderPercent;
     }
 
     void UpdateExp()
     {
         float sliderPercent = (float)playerStats.CurrentExp / playerStats.NextLevelExp;
+        expSlider.fillAmount = sliderPercent;
     }
 }
