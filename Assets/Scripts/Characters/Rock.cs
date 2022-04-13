@@ -26,7 +26,7 @@ public class Rock : MonoBehaviour
     {
         if (rb.velocity.sqrMagnitude < 1f)
         {
-            gameObject.tag = "Attackable";
+            gameObject.GetComponent<Collider>().enabled = true;
             rockStates = RockStates.None;
         }
     }
@@ -55,7 +55,7 @@ public class Rock : MonoBehaviour
 
                     other.gameObject.GetComponent<Animator>().SetTrigger("dizzy");
 
-                    other.gameObject.GetComponent<CharacterStats>().TakeDamage(damage);
+                    other.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
 
                     rockStates = RockStates.None;
                 }
@@ -65,7 +65,7 @@ public class Rock : MonoBehaviour
             case RockStates.HitEnemy:
                 if (other.gameObject.GetComponent<Golem>())
                 {
-                    var otherStats = other.gameObject.GetComponent<CharacterStats>();
+                    var otherStats = other.gameObject.GetComponent<EnemyStats>();
                     otherStats.TakeDamage(damage);
                     Instantiate(breakEffect, transform.position, Quaternion.identity);
                     other.gameObject.GetComponent<Animator>().SetTrigger("hit");

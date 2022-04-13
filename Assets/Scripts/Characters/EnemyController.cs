@@ -4,7 +4,8 @@ using Utils;
 public enum EnemyStates { GUARD, PATROL, CHASE, DEAD }
 
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(CharacterStats))]
+[RequireComponent(typeof(EnemyStats))]
+[RequireComponent(typeof(HealthBarUI))]
 
 public class EnemyController : MonoBehaviour, IEndGameObserver
 {
@@ -279,7 +280,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         if (attackTarget != null && transform.IsFacingTarget(attackTarget.transform, sightAngle))
         {
             // Debug.Log("player!");
-            var targetStats = attackTarget.GetComponent<CharacterStats>();
+            var targetStats = attackTarget.GetComponent<PlayerStats>();
             targetStats.TakeDamage(characterStats);
         }
     }

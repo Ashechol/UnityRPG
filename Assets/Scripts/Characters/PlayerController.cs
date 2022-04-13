@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private NavMeshAgent agent;
     public Animator anim;
     public CapsuleCollider capColl;
-    public CharacterStats characterStats;
+    public PlayerStats stats;
     public float hitForce = 20;
     private GameObject attackTarget;
     private float lastAttackTime;
@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        characterStats = GetComponent<CharacterStats>();
+        stats = GetComponent<PlayerStats>();
         capColl = GetComponent<CapsuleCollider>();
         stopDistance = agent.stoppingDistance;
     }
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         MouseManager.Instance.OnMouseClicked += MoveToTarget;
         MouseManager.Instance.OnEnemyClicked += EventAttack;
 
-        GameManager.Instance.RegisterPlayer(characterStats);
+        GameManager.Instance.RegisterPlayer(stats);
     }
 
 
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator MoveToAttackTarget()
     {
         agent.isStopped = false;
-        agent.stoppingDistance = characterStats.attackData.attackRange;  // 停止距离变为攻击距离，防止被体形大的敌人阻挡
+        agent.stoppingDistance = stats.attackData.attackRange;  // 停止距离变为攻击距离，防止被体形大的敌人阻挡
 
         transform.LookAt(attackTarget.transform);
 
@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
         }
         else
             while (Vector3.Distance(attackTarget.transform.position,
-                           transform.position) > characterStats.attackData.attackRange)
+                           transform.position) > stats.attackData.attackRange)
             {
                 agent.destination = attackTarget.transform.position;
                 yield return null;  // yield return 暂时挂起，下一帧继续从这里开始执行协程
@@ -101,11 +101,11 @@ public class PlayerController : MonoBehaviour
         // Attack
         if (lastAttackTime < 0)
         {
-            characterStats.isCritical = Random.value < characterStats.attackData.criticalChance;
-            anim.SetBool("critical", characterStats.isCritical);
+            stats.isCritical = Random.value < stats.attackData.criticalChance;
+            anim.SetBool("critical", stats.isCritical);
             anim.SetTrigger("attack");
             // 重置冷却时间
-            lastAttackTime = characterStats.attackData.coolDown;
+            lastAttackTime = stats.attackData.coolDown;
         }
 
     }
@@ -115,8 +115,8 @@ public class PlayerController : MonoBehaviour
     {
         if (attackTarget.CompareTag("Enemy"))
         {
-            var targetStats = attackTarget.GetComponent<CharacterStats>();
-            targetStats.TakeDamage(characterStats);
+            var targetStats = attackTarget.GetComponent<EnemyStats>();
+            targetStats.TakeDamage(stats);
         }
 
         if (attackTarget.CompareTag("Attackable"))
@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
                 attackTarget.GetComponent<Rigidbody>().velocity = Vector3.one;
                 attackTarget.GetComponent<Rigidbody>().AddForce(transform.forward *
                                                                 hitForce, ForceMode.Impulse);
-                attackTarget.tag = "Ground";
+                attackTarget.GetComponent<Collider>().enabled = false;
             }
         }
     }

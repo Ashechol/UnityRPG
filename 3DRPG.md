@@ -50,3 +50,5 @@ public class CharacterData_SO : ScriptableObject
 ```
 
 Vector3.Distance() 和 Vector3.SqrMagnitude()，后者的开销较少
+
+在挂载脚本前就可以在inspector窗口给脚本修改信息

@@ -3,7 +3,9 @@ guid: bdadfcc96152066478de079de155ca81
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - heathBar: {fileID: 7256677866069128951, guid: 2120d243375ea6349b5b38ede5633822, type: 3}
+  - heathBarPoint: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &108473136388842845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1912903288754447269}
+  m_Layer: 0
+  m_Name: HealthBar Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1912903288754447269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108473136388842845}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.69, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4723024255851807343}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4723024253836646355
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,6 +735,8 @@ GameObject:
   - component: {fileID: 7289486579274879853}
   - component: {fileID: 1099421662825850835}
   - component: {fileID: 7442479907020307817}
+  - component: {fileID: 8786953876376511743}
+  - component: {fileID: 1160189653104597087}
   m_Layer: 7
   m_Name: Golem
   m_TagString: Enemy
@@ -725,6 +757,7 @@ Transform:
   m_Children:
   - {fileID: 4723024253891114042}
   - {fileID: 4723024255648191770}
+  - {fileID: 1912903288754447269}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -820,6 +853,39 @@ MonoBehaviour:
   characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: 4009bbfdbc191be4ba21473558c152e8, type: 2}
   isCritical: 0
+--- !u!114 &8786953876376511743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4723024255851807341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdadfcc96152066478de079de155ca81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heathBar: {fileID: 7256677866069128951, guid: 2120d243375ea6349b5b38ede5633822, type: 3}
+  healthBarPoint: {fileID: 1912903288754447269}
+  alwaysVisible: 0
+  visibleTime: 0
+--- !u!114 &1160189653104597087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4723024255851807341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d04a692c230e69645928c3f65250dcd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  templeteData: {fileID: 11400000, guid: 14755a58bd0b9f743a50798184adb989, type: 2}
+  characterData: {fileID: 0}
+  attackData: {fileID: 11400000, guid: 4009bbfdbc191be4ba21473558c152e8, type: 2}
+  isCritical: 0
+  enemyData: {fileID: 0}
 --- !u!1 &4723024255875520043
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &593667157864970019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2602766249032249053}
+  m_Layer: 7
+  m_Name: HealthBar Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2602766249032249053
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593667157864970019}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.56, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2955734188466599647}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2955734188183411215
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,7 +105,8 @@ GameObject:
   - component: {fileID: 8573968518096542544}
   - component: {fileID: 2047368967}
   - component: {fileID: 2047368965}
-  - component: {fileID: 2047368966}
+  - component: {fileID: 8796593393200794637}
+  - component: {fileID: 6124889529864317335}
   m_Layer: 7
   m_Name: Grunt
   m_TagString: Enemy
@@ -96,6 +127,7 @@ Transform:
   m_Children:
   - {fileID: 2955734189981712037}
   - {fileID: 2955734190231087416}
+  - {fileID: 2602766249032249053}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -166,14 +198,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 721126a188875554db5319d5601abe96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightRadius: 8
+  sightRadius: 7
   sightAngle: 50
   isGuard: 1
   lookAtTime: 3
   patrolRange: 5
   wayPoint: {x: 0, y: 0, z: 0}
   kickForce: 20
---- !u!114 &2047368966
+--- !u!114 &8796593393200794637
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,13 +214,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 2955734188466599201}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 119f543564a3ecf4e91b2e3852c9aa88, type: 3}
+  m_Script: {fileID: 11500000, guid: d04a692c230e69645928c3f65250dcd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   templeteData: {fileID: 11400000, guid: 1f721b3c658f0324da7c9b0da8e6aae3, type: 2}
   characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: 3e62c9951e427714b8d3621d48fb4037, type: 2}
   isCritical: 0
+  enemyData: {fileID: 0}
+--- !u!114 &6124889529864317335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2955734188466599201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdadfcc96152066478de079de155ca81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heathBar: {fileID: 7256677866069128951, guid: 2120d243375ea6349b5b38ede5633822, type: 3}
+  healthBarPoint: {fileID: 2602766249032249053}
+  alwaysVisible: 0
+  visibleTime: 10
 --- !u!1 &2955734188575828177
 GameObject:
   m_ObjectHideFlags: 0

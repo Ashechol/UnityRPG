@@ -1744,7 +1744,7 @@ GameObject:
   - component: {fileID: 6449158702142741509}
   - component: {fileID: 4985226379436609648}
   - component: {fileID: 4985226379436609651}
-  - component: {fileID: 4985226379352317666}
+  - component: {fileID: 2417395492366186812}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1854,9 +1854,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   capColl: {fileID: 0}
-  characterStats: {fileID: 0}
+  stats: {fileID: 0}
   hitForce: 10
---- !u!114 &4985226379352317666
+--- !u!114 &2417395492366186812
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1865,13 +1865,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6449158702150135737}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 119f543564a3ecf4e91b2e3852c9aa88, type: 3}
+  m_Script: {fileID: 11500000, guid: 9cdf1f04a467eab4e85e9321342ea991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   templeteData: {fileID: 11400000, guid: c66807ed3e99a6845b8e20a240efc73c, type: 2}
   characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: 06ee8c8cd71b3fc4fb5e673ccd5f4c63, type: 2}
   isCritical: 0
+  playerData: {fileID: 0}
 --- !u!1 &6449158702150135739
 GameObject:
   m_ObjectHideFlags: 0

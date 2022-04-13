@@ -9,10 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d17a14f86fbb0b343ab80d843abb5c17, type: 3}
+  m_Script: {fileID: 11500000, guid: 05c38900389d0f34687a79be7143e2bf, type: 3}
   m_Name: Player Data
   m_EditorClassIdentifier: 
-  MaxHealth: 100
-  CurrentHealth: 100
-  BaseDefence: 5
-  CurrentDefence: 5
+  maxHealth: 100
+  currentHealth: 100
+  baseDefence: 5
+  currentDefence: 5
+  currentLevel: 1
+  maxLevel: 30
+  nextLevelExp: 30
+  currentExp: 0
+  levelBuff: 2.5
+  healthBuff: 1.2

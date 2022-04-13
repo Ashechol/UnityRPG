@@ -16,7 +16,7 @@ public class Golem : EnemyController
     {
         if (attackTarget != null && transform.IsFacingTarget(attackTarget.transform, sightAngle))
         {
-            var targetStats = attackTarget.GetComponent<CharacterStats>();
+            var targetStats = attackTarget.GetComponent<PlayerStats>();
 
             Vector3 direction = (attackTarget.transform.position - transform.position).normalized;
             attackTarget.GetComponent<NavMeshAgent>().isStopped = true;
