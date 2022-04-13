@@ -11,7 +11,6 @@ public class EnemyStats : CharacterStats
     {
         base.Awake();
         enemyData = characterData as EnemyData_SO;
-        Debug.Log(CurrentHealth);
     }
 
     public void TakeDamage(PlayerStats attacker)
@@ -37,7 +36,7 @@ public class EnemyStats : CharacterStats
         // Update UI
         OnHealthBarUpdate?.Invoke(CurrentHealth, MaxHealth);
 
-        //TODO: Level Up
+        // Level Up
         if (CurrentHealth <= 0)
         {
             attacker.UpdateExp(enemyData.dropExp);

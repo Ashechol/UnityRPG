@@ -7,6 +7,31 @@ public class PlayerStats : CharacterStats
     [HideInInspector]
     public PlayerData_SO playerData;
 
+    #region Read from Ddata_SO
+
+    public int CurrentExp
+    {
+        get { return playerData.currentExp; }
+        set { playerData.currentExp = value; }
+    }
+    public int NextLevelExp
+    {
+        get { return playerData.nextLevelExp; }
+        set { playerData.nextLevelExp = value; }
+    }
+    public int MaxLevel
+    {
+        get { return playerData.maxLevel; }
+        set { playerData.maxLevel = value; }
+    }
+    public int CurrentLevel
+    {
+        get { return playerData.currentLevel; }
+        set { playerData.currentLevel = value; }
+    }
+
+    #endregion
+
     protected override void Awake()
     {
         base.Awake();

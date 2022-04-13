@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public static CharacterStats playerStats;
+    public PlayerStats playerStats;
 
     List<IEndGameObserver> endGameObservers = new List<IEndGameObserver>();
 
-    public void RegisterPlayer(CharacterStats player)
+    public void RegisterPlayer(PlayerStats player)
     {
         playerStats = player;
     }

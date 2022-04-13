@@ -4,7 +4,6 @@ using UnityEngine.VFX;
 
 public class CharacterStats : MonoBehaviour
 {
-
     public CharacterData_SO templeteData;
     public CharacterData_SO characterData;
     public AttackData_SO attackData;
