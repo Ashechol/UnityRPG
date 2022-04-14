@@ -28,7 +28,7 @@ public class HealthBarUI : MonoBehaviour
 
         foreach (Canvas canvas in FindObjectsOfType<Canvas>())
         {
-            if (canvas.name == "HealthBar Canvas")
+            if (canvas.name == "Enemy Canvas")
             {
                 UIbar = Instantiate(heathBar, canvas.transform).transform;
                 healthSlider = UIbar.GetChild(0).GetComponent<Image>();

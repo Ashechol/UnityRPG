@@ -43,9 +43,8 @@ GameObject:
   - component: {fileID: 384894989}
   - component: {fileID: 3122442527218432747}
   - component: {fileID: 3609078386505607218}
-  - component: {fileID: 4070917689914115235}
-  - component: {fileID: 150854697870438535}
   - component: {fileID: 8386945564741630709}
+  - component: {fileID: 150854697870438535}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Enemy
@@ -139,42 +138,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightRadius: 6
   sightAngle: 30
-  isGuard: 1
+  isGuard: 0
   lookAtTime: 2
   patrolRange: 5
   wayPoint: {x: 0, y: 0, z: 0}
---- !u!114 &4070917689914115235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4650126955185826435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 119f543564a3ecf4e91b2e3852c9aa88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  templeteData: {fileID: 11400000, guid: ef6b90f9631d03e44935be3b23f07f79, type: 2}
-  characterData: {fileID: 0}
-  attackData: {fileID: 11400000, guid: 6bdeae1f92fc7fb4ea1842287c3a6078, type: 2}
-  isCritical: 0
---- !u!114 &150854697870438535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4650126955185826435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdadfcc96152066478de079de155ca81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heathBar: {fileID: 7256677866069128951, guid: 2120d243375ea6349b5b38ede5633822, type: 3}
-  healthBarPoint: {fileID: 3512254180828724408}
-  alwaysVisible: 0
-  visibleTime: 0
 --- !u!114 &8386945564741630709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +159,22 @@ MonoBehaviour:
   attackData: {fileID: 11400000, guid: 6bdeae1f92fc7fb4ea1842287c3a6078, type: 2}
   isCritical: 0
   enemyData: {fileID: 0}
+--- !u!114 &150854697870438535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4650126955185826435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdadfcc96152066478de079de155ca81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heathBar: {fileID: 7256677866069128951, guid: 2120d243375ea6349b5b38ede5633822, type: 3}
+  healthBarPoint: {fileID: 3512254180828724408}
+  alwaysVisible: 0
+  visibleTime: 10
 --- !u!1 &4650196707220931221
 GameObject:
   m_ObjectHideFlags: 0

@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 1837317991850364}
   - component: {fileID: 2721586297822715871}
   - component: {fileID: 5917835473978800254}
-  - component: {fileID: 8906948113999724582}
+  - component: {fileID: 7567778399362831782}
   - component: {fileID: 9138213120694947245}
   m_Layer: 7
   m_Name: TurtleShell
@@ -297,7 +297,7 @@ MonoBehaviour:
   lookAtTime: 3
   patrolRange: 3
   wayPoint: {x: 0, y: 0, z: 0}
---- !u!114 &8906948113999724582
+--- !u!114 &7567778399362831782
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -306,13 +306,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4256061192916883161}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 119f543564a3ecf4e91b2e3852c9aa88, type: 3}
+  m_Script: {fileID: 11500000, guid: d04a692c230e69645928c3f65250dcd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   templeteData: {fileID: 11400000, guid: 886c868b2ac0135488cda27b408ee476, type: 2}
   characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: f56b9c3f96253a64ab9c5ef829dc7320, type: 2}
   isCritical: 0
+  enemyData: {fileID: 0}
 --- !u!114 &9138213120694947245
 MonoBehaviour:
   m_ObjectHideFlags: 0
