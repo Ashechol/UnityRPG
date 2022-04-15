@@ -26,7 +26,7 @@ public class Rock : MonoBehaviour
     {
         if (rb.velocity.sqrMagnitude < 1f)
         {
-            gameObject.GetComponent<Collider>().enabled = true;
+            gameObject.tag = "Attackable";
             rockStates = RockStates.None;
         }
     }

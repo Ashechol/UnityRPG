@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
                 attackTarget.GetComponent<Rigidbody>().velocity = Vector3.one;
                 attackTarget.GetComponent<Rigidbody>().AddForce(transform.forward *
                                                                 hitForce, ForceMode.Impulse);
-                attackTarget.GetComponent<Collider>().enabled = false;
+                attackTarget.gameObject.tag = "Untagged";
             }
         }
     }

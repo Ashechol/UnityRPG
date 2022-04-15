@@ -835,7 +835,7 @@ MonoBehaviour:
   wayPoint: {x: 0, y: 0, z: 0}
   kickForce: 25
   throwForce: 20
-  rockPrefab: {fileID: 3568734821334489020, guid: 9583dad449e3cb241b070d1a4ff26e5d, type: 3}
+  rockPrefab: {fileID: 1642026572374376849, guid: 0bd5fae196542454585c92c4ec757038, type: 3}
   handPos: {fileID: 4723024255579533577}
 --- !u!114 &7442479907020307817
 MonoBehaviour:
