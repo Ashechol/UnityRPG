@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Utils;
 public enum EnemyStates { GUARD, PATROL, CHASE, DEAD }
+public enum EnemyType { Normal, Elite, Boss }
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(EnemyStats))]
@@ -17,6 +18,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     protected CharacterStats characterStats;
     private bool isWalk, isFollow, isChase, isHit, isDead;
     private bool playerDead;
+    protected bool speciality;
     private float speed;
     private Vector3 guardPos;
     private Quaternion guardRotation;  // Unity中记录旋转信息的是四元数
@@ -36,6 +38,10 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     [Header("Patrol Settings")]
     public float patrolRange;
     public Vector3 wayPoint;
+
+    [Header("Type Settings")]
+    public EnemyType monsterType;
+    public int level;
 
     protected virtual void Awake()
     {
@@ -58,6 +64,13 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
             enemyStates = EnemyStates.PATROL;
             GetNewWayPoint();
         }
+
+        //TODO: 怪物类型设计
+        if (monsterType == EnemyType.Normal)
+            speciality = false;
+        else
+            speciality = true;
+
 
         //FIXME: 场景切换后修改
         GameManager.Instance.AddObserver(this);
@@ -227,7 +240,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
 
     bool TargetInSkillRange()
     {
-        if (attackTarget != null)
+        if (speciality && attackTarget != null)
             return Vector3.Distance(attackTarget.transform.position, transform.position) <=
                                     characterStats.attackData.skillRange;
         else
