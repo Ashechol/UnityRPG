@@ -38,7 +38,7 @@ public class MouseManager : Singleton<MouseManager>  // 继承单例模式
         if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layerMask))
         {
             // 切换鼠标贴图
-            if (TeleportManager.Instance.canTeleport)
+            if (SceneLoadManager.Instance.canTeleport)
                 Cursor.SetCursor(doorway, new Vector2(16, 16), CursorMode.Auto);
             else
                 switch (hitInfo.collider.gameObject.tag)

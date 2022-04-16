@@ -33,7 +33,7 @@ public class Portal : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && canTeleport)
         {
-            TeleportManager.Instance.TeleportToPortal(this);
+            SceneLoadManager.Instance.TeleportToPortal(this);
         }
     }
 
@@ -45,12 +45,12 @@ public class Portal : MonoBehaviour
     void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
-            canTeleport = TeleportManager.Instance.canTeleport = true;
+            canTeleport = SceneLoadManager.Instance.canTeleport = true;
     }
 
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
-            canTeleport = TeleportManager.Instance.canTeleport = false;
+            canTeleport = SceneLoadManager.Instance.canTeleport = false;
     }
 }

@@ -48,3 +48,6 @@ MonoBehaviour:
   attack: {fileID: 2800000, guid: cc99a1b5b70513d4799d90ec3c7332e0, type: 3}
   target: {fileID: 2800000, guid: b24b7fd70d633f64893d70e43894c0dd, type: 3}
   arrow: {fileID: 2800000, guid: e69fea2d356ea0c49b21d9cda02e1e90, type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 129

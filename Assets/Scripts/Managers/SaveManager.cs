@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class SaveManager : Singleton<SaveManager>
 {
+    string sceneKey = "scene";
+    public string SceneName { get { return PlayerPrefs.GetString(sceneKey); } }
 
     protected override void Awake()
     {
@@ -40,6 +42,8 @@ public class SaveManager : Singleton<SaveManager>
     {
         var jsonData = JsonUtility.ToJson(data, true);
         PlayerPrefs.SetString(key, jsonData);
+        PlayerPrefs.SetString(sceneKey, SceneManager.GetActiveScene().name);
+        Debug.Log("saved scene:" + PlayerPrefs.GetString(sceneKey));
         PlayerPrefs.Save();
     }
 

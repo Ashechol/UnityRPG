@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         stopDistance = agent.stoppingDistance;
     }
 
-    void Start()
+    void OnEnable()
     {
         // += 多播委托：一个委托代表多个方法
         // 将方法订阅到事件
@@ -37,10 +37,17 @@ public class PlayerController : MonoBehaviour
 
     void OnDisable()
     {
-        MouseManager.Instance.OnMouseClicked -= MoveToTarget;
-        MouseManager.Instance.OnEnemyClicked -= EventAttack;
+        if (MouseManager.Instance != null)
+        {
+            MouseManager.Instance.OnMouseClicked -= MoveToTarget;
+            MouseManager.Instance.OnEnemyClicked -= EventAttack;
+        }
     }
 
+    void Start()
+    {
+        SaveManager.Instance.LoadPlayerData();
+    }
 
     private void Update()
     {
