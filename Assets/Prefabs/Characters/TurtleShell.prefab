@@ -275,7 +275,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -295,8 +295,10 @@ MonoBehaviour:
   sightAngle: 25
   isGuard: 0
   lookAtTime: 3
-  patrolRange: 3
+  patrolRange: 4
   wayPoint: {x: 0, y: 0, z: 0}
+  monsterType: 0
+  level: 0
 --- !u!114 &7567778399362831782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,7 +331,7 @@ MonoBehaviour:
   heathBar: {fileID: 7256677866069128951, guid: 2120d243375ea6349b5b38ede5633822, type: 3}
   healthBarPoint: {fileID: 7261972066777832658}
   alwaysVisible: 0
-  visibleTime: 0
+  visibleTime: 10
 --- !u!1 &4256116168084565785
 GameObject:
   m_ObjectHideFlags: 0

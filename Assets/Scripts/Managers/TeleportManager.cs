@@ -6,16 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class TeleportManager : Singleton<TeleportManager>
 {
+    public GameObject playerPrefab;
     GameObject player;
     NavMeshAgent playerAgent;
     Transform dst;
-
     public bool canTeleport;
 
     protected override void Awake()
     {
         base.Awake();
-
+        DontDestroyOnLoad(this);
     }
     public void TeleportToPortal(Portal portal)
     {
@@ -25,21 +25,38 @@ public class TeleportManager : Singleton<TeleportManager>
                 StartCoroutine(Teleport(portal.dstTag));
                 break;
             case Portal.TransitionType.DifferentScene:
+                StartCoroutine(Teleport(portal.dstTag, portal.sceneName));
                 break;
         }
     }
 
     IEnumerator Teleport(Portal.PortalTag dstTag, string sceneName = null)
     {
-        player = GameManager.Instance.playerStats.gameObject;
-        playerAgent = player.GetComponent<NavMeshAgent>();
-        dst = GetDestination(dstTag);
+        //保存数据
 
-        playerAgent.enabled = false;
-        player.transform.SetPositionAndRotation(dst.position, dst.rotation);
-        playerAgent.enabled = true;
+        if (sceneName != null)
+        {
+            SaveManager.Instance.SavePlayerData();
 
-        yield return null;
+            yield return SceneManager.LoadSceneAsync(sceneName);
+            dst = GetDestination(dstTag);
+            yield return Instantiate(playerPrefab, dst.position, dst.rotation);
+
+            SaveManager.Instance.LoadPlayerData();
+
+            yield break;
+        }
+        else
+        {
+            player = GameManager.Instance.playerStats.gameObject;
+            playerAgent = player.GetComponent<NavMeshAgent>();
+            dst = GetDestination(dstTag);
+
+            playerAgent.enabled = false;
+            player.transform.SetPositionAndRotation(dst.position, dst.rotation);
+            playerAgent.enabled = true;
+            yield return null;
+        }
     }
 
     private Transform GetDestination(Portal.PortalTag dstTag)

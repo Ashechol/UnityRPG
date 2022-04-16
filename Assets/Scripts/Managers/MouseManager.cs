@@ -20,7 +20,7 @@ public class MouseManager : Singleton<MouseManager>  // 继承单例模式
     protected override void Awake()
     {
         base.Awake();
-        // DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this);
     }
 
     void Update()

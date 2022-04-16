@@ -53,6 +53,16 @@ Vector3.Distance() 和 Vector3.SqrMagnitude()，后者的开销较少
 
 在挂载脚本前就可以在inspector窗口给脚本修改信息
 
+#### 数据保存
+
+* PlayerPrefs + JsonUtility
+  
+  * JsonUtility 讲 ScriptableObject 的数据转换为 Json格式（string类型）
+  
+  * PlayerPrefs 使用键值形式保存数据到windows注册表
+
+序列化反序列化
+
 ### Shader
 
 * UV：贴图坐标相当于空间坐标XY的概念，shader中的UV输入就是贴图输入的意思

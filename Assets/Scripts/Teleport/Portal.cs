@@ -12,16 +12,16 @@ public class Portal : MonoBehaviour
     private bool canTeleport;
 
     [Header("Information")]
+    public PortalTag portalTag;
     public TransitionType transitionType;
     public string sceneName;
-    public PortalTag portalTag;
     public PortalTag dstTag;
 
     public Transform Exit { get { return exit; } }
 
     void Awake()
     {
-        exit = transform.GetChild(0);
+        exit = transform.GetComponentInParent<Transform>().GetChild(1);
     }
 
     void Start()
@@ -39,7 +39,7 @@ public class Portal : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.forward = -cam.forward;
+        transform.GetChild(0).forward = -cam.forward;
     }
 
     void OnTriggerStay(Collider other)

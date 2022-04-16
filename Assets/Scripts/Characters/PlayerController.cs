@@ -5,8 +5,8 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     private NavMeshAgent agent;
-    public Animator anim;
-    public CapsuleCollider capColl;
+    private Animator anim;
+    private CapsuleCollider capColl;
     public PlayerStats stats;
     public float hitForce = 20;
     private GameObject attackTarget;
@@ -33,6 +33,12 @@ public class PlayerController : MonoBehaviour
         MouseManager.Instance.OnEnemyClicked += EventAttack;
 
         GameManager.Instance.RegisterPlayer(stats);
+    }
+
+    void OnDisable()
+    {
+        MouseManager.Instance.OnMouseClicked -= MoveToTarget;
+        MouseManager.Instance.OnEnemyClicked -= EventAttack;
     }
 
 
