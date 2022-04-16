@@ -60,34 +60,41 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     {
         yield return SceneManager.LoadSceneAsync(sceneName);
         dst = GetDestination(dstTag);
-        yield return Instantiate(playerPrefab, dst.position, dst.rotation);
-        SaveManager.Instance.SavePlayerData();
+
+        if (sceneName != "Main Menu")
+        {
+            yield return Instantiate(playerPrefab, dst.position, dst.rotation);
+            SaveManager.Instance.SavePlayerData();
+        }
         yield break;
     }
 
-    public void LoadFirstScene()
+    IEnumerator LoadSavedScene(string sceneName, Portal.PortalTag dstTag = Portal.PortalTag.ENTER)
+    {
+        yield return SceneManager.LoadSceneAsync(sceneName);
+
+        dst = GetDestination(dstTag);
+
+        yield return Instantiate(playerPrefab, dst.position, dst.rotation);
+
+        SaveManager.Instance.LoadPlayerData();
+        yield break;
+    }
+
+    public void LoadMainMenu()
+    {
+        StartCoroutine(LoadScene("Main Menu"));
+    }
+
+    public void LoadFirstLevel()
     {
         StartCoroutine(LoadScene("Big Plain"));
     }
 
     public void ContinueScene()
     {
-        StartCoroutine(LoadScene(SaveManager.Instance.SceneName));
+        StartCoroutine(LoadSavedScene(SaveManager.Instance.SavedScene));
     }
-
-
-    // IEnumerator LoadScene(string sceneName)
-    // {
-    //     if (sceneName != null)
-    //     {
-    //         yield return SceneManager.LoadSceneAsync(sceneName);
-    //         var dst = GetDestination(Portal.PortalTag.ENTER);
-    //         yield return player = Instantiate(playerPrefab, dst.position, dst.rotation);
-
-    //         SaveManager.Instance.SavePlayerData();
-    //         yield break;
-    //     }
-    // }
 
     private Transform GetDestination(Portal.PortalTag dstTag)
     {

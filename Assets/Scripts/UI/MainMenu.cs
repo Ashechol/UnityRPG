@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
     void NewGame()
     {
         PlayerPrefs.DeleteAll();
-        SceneLoadManager.Instance.LoadFirstScene();
+        SceneLoadManager.Instance.LoadFirstLevel();
     }
 
     void ContinueGame()

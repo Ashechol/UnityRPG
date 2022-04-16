@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class SaveManager : Singleton<SaveManager>
 {
     string sceneKey = "scene";
-    public string SceneName { get { return PlayerPrefs.GetString(sceneKey); } }
+    public string SavedScene { get { return PlayerPrefs.GetString(sceneKey); } }
 
     protected override void Awake()
     {
@@ -15,6 +15,11 @@ public class SaveManager : Singleton<SaveManager>
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SavePlayerData();
+            SceneLoadManager.Instance.LoadMainMenu();
+        }
         if (Input.GetKeyDown(KeyCode.F5))
         {
             SavePlayerData();

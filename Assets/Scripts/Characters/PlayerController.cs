@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        SaveManager.Instance.LoadPlayerData();
+        // SaveManager.Instance.LoadPlayerData();
     }
 
     private void Update()
