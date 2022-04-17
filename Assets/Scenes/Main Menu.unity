@@ -10449,7 +10449,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 288782044478882928, guid: 0d01e9316e1a522479bb5ed9c8dbc4d5, type: 3}
       propertyPath: m_Name
-      value: Teleport Manager
+      value: Scene Load Manager
       objectReference: {fileID: 0}
     - target: {fileID: 288782044478882934, guid: 0d01e9316e1a522479bb5ed9c8dbc4d5, type: 3}
       propertyPath: m_RootOrder
