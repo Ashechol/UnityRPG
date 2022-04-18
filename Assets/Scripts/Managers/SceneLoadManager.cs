@@ -65,7 +65,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>, IEndGameObserver
     {
         // 开始加载画面渐出
         SceneFader fade = Instantiate(sceneFaderPrefab);
-        yield return StartCoroutine(fade.FadeOut(2.5f));
+        yield return StartCoroutine(fade.FadeOut(1.7f));
 
         yield return SceneManager.LoadSceneAsync(sceneName);
         dst = GetDestination(dstTag);
@@ -77,7 +77,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>, IEndGameObserver
         }
 
         // 加载完毕画面渐进
-        yield return StartCoroutine(fade.FadeIn(2.5f));
+        yield return StartCoroutine(fade.FadeIn(2f));
 
         yield break;
     }
