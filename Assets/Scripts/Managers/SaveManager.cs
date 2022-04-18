@@ -39,6 +39,7 @@ public class SaveManager : Singleton<SaveManager>
 
     public void LoadPlayerData()
     {
+        Debug.Log("Loaded scene:" + PlayerPrefs.GetString(sceneKey));
         Load(GameManager.Instance.playerStats.characterData,
              GameManager.Instance.playerStats.characterData.name);
     }

@@ -37,7 +37,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         {
             SaveManager.Instance.SavePlayerData();
             StartCoroutine(LoadScene(sceneName, dstTag));
-            StartCoroutine(SaveData());
+            StartCoroutine(LoadData());
             sceneLoadComplete = false;
         }
         else  // 同关卡传送
