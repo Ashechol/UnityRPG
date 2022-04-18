@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
-public class SceneLoadManager : Singleton<SceneLoadManager>
+public class SceneLoadManager : Singleton<SceneLoadManager>, IEndGameObserver
 {
     public GameObject playerPrefab;
+    public SceneFader sceneFaderPrefab;
     GameObject player;
     NavMeshAgent playerAgent;
     Transform dst;
     bool sceneLoadComplete;
+    bool fadeInGameOver;  // 保证收到EndNotify只执行一次SceneFade
     public bool canTeleport;
 
     protected override void Awake()
@@ -18,6 +20,13 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         base.Awake();
         DontDestroyOnLoad(this);
     }
+
+    void Start()
+    {
+        GameManager.Instance.AddObserver(this);
+        fadeInGameOver = true;
+    }
+
     public void TeleportToPortal(Portal portal)
     {
         switch (portal.transitionType)
@@ -54,6 +63,10 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 
     IEnumerator LoadScene(string sceneName, Portal.PortalTag dstTag = Portal.PortalTag.ENTER)
     {
+        // 开始加载画面渐出
+        SceneFader fade = Instantiate(sceneFaderPrefab);
+        yield return StartCoroutine(fade.FadeOut(2.5f));
+
         yield return SceneManager.LoadSceneAsync(sceneName);
         dst = GetDestination(dstTag);
 
@@ -62,6 +75,10 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
             yield return Instantiate(playerPrefab, dst.position, dst.rotation);
             sceneLoadComplete = true;  // 场景和角色加载完成
         }
+
+        // 加载完毕画面渐进
+        yield return StartCoroutine(fade.FadeIn(2.5f));
+
         yield break;
     }
 
@@ -87,7 +104,6 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 
     public void LoadMainMenu()
     {
-        SaveManager.Instance.SavePlayerData();
         StartCoroutine(LoadScene("Main Menu"));
     }
 
@@ -112,5 +128,14 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         }
 
         return null;
+    }
+
+    public void EndNotify()
+    {
+        if (fadeInGameOver)
+        {
+            fadeInGameOver = false;
+            LoadMainMenu();
+        }
     }
 }

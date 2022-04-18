@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 288782044478882934}
   - component: {fileID: 288782044478882935}
   m_Layer: 0
-  m_Name: Teleport Manager
+  m_Name: Scene Load Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 6449158702150135737, guid: 16a68ec87a3a05843829aa533f5d1d13, type: 3}
+  sceneFaderPrefab: {fileID: 3180402193033908543, guid: a6f96ad973bc51b40ad5785d9632b6ed, type: 3}
   canTeleport: 0

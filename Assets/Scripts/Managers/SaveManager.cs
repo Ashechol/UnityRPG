@@ -17,6 +17,7 @@ public class SaveManager : Singleton<SaveManager>
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            SaveManager.Instance.SavePlayerData();
             SceneLoadManager.Instance.LoadMainMenu();
         }
         if (Input.GetKeyDown(KeyCode.F5))

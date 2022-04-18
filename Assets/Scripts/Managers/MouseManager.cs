@@ -52,6 +52,9 @@ public class MouseManager : Singleton<MouseManager>  // 继承单例模式
                     case "Attackable":
                         Cursor.SetCursor(attack, new Vector2(16, 16), CursorMode.Auto);
                         break;
+                    default:
+                        Cursor.SetCursor(arrow, new Vector2(16, 16), CursorMode.Auto);
+                        break;
                 }
         }
     }
