@@ -10,7 +10,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     GameObject player;
     NavMeshAgent playerAgent;
     Transform dst;
-    bool loadingComplete;
+    bool sceneLoadComplete;
     public bool canTeleport;
 
     protected override void Awake()
@@ -37,9 +37,8 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         {
             SaveManager.Instance.SavePlayerData();
             StartCoroutine(LoadScene(sceneName, dstTag));
-            if (loadingComplete)
-                SaveManager.Instance.LoadPlayerData();
-            loadingComplete = false;
+            StartCoroutine(SaveData());
+            sceneLoadComplete = false;
         }
         else  // 同关卡传送
         {
@@ -61,7 +60,25 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         if (sceneName != "Main Menu")
             yield return Instantiate(playerPrefab, dst.position, dst.rotation);
 
-        loadingComplete = true;  // 场景和角色加载完成
+        sceneLoadComplete = true;  // 场景和角色加载完成
+        yield break;
+    }
+
+    IEnumerator SaveData()
+    {
+        while (!sceneLoadComplete)
+            yield return null;
+
+        SaveManager.Instance.SavePlayerData();
+        yield break;
+    }
+
+    IEnumerator LoadData()
+    {
+        while (!sceneLoadComplete)
+            yield return null;
+
+        SaveManager.Instance.LoadPlayerData();
         yield break;
     }
 
@@ -73,17 +90,15 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     public void LoadFirstLevel()
     {
         StartCoroutine(LoadScene("Big Plain"));
-        if (loadingComplete)
-            SaveManager.Instance.SavePlayerData();
-        loadingComplete = false;
+        StartCoroutine(SaveData());
+        sceneLoadComplete = false;
     }
 
     public void ContinueScene()
     {
         StartCoroutine(LoadScene(SaveManager.Instance.SavedScene));
-        if (loadingComplete)
-            SaveManager.Instance.LoadPlayerData();
-        loadingComplete = false;
+        StartCoroutine(LoadData());
+        sceneLoadComplete = false;
     }
 
     private Transform GetDestination(Portal.PortalTag dstTag)
