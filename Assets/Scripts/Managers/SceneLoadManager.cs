@@ -58,9 +58,10 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         dst = GetDestination(dstTag);
 
         if (sceneName != "Main Menu")
+        {
             yield return Instantiate(playerPrefab, dst.position, dst.rotation);
-
-        sceneLoadComplete = true;  // 场景和角色加载完成
+            sceneLoadComplete = true;  // 场景和角色加载完成
+        }
         yield break;
     }
 
@@ -70,6 +71,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
             yield return null;
 
         SaveManager.Instance.SavePlayerData();
+        sceneLoadComplete = false;
         yield break;
     }
 
@@ -79,11 +81,13 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
             yield return null;
 
         SaveManager.Instance.LoadPlayerData();
+        sceneLoadComplete = false;
         yield break;
     }
 
     public void LoadMainMenu()
     {
+        SaveManager.Instance.SavePlayerData();
         StartCoroutine(LoadScene("Main Menu"));
     }
 
@@ -91,14 +95,12 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     {
         StartCoroutine(LoadScene("Big Plain"));
         StartCoroutine(SaveData());
-        sceneLoadComplete = false;
     }
 
     public void ContinueScene()
     {
         StartCoroutine(LoadScene(SaveManager.Instance.SavedScene));
         StartCoroutine(LoadData());
-        sceneLoadComplete = false;
     }
 
     private Transform GetDestination(Portal.PortalTag dstTag)

@@ -17,7 +17,6 @@ public class SaveManager : Singleton<SaveManager>
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SavePlayerData();
             SceneLoadManager.Instance.LoadMainMenu();
         }
         if (Input.GetKeyDown(KeyCode.F5))
@@ -35,13 +34,18 @@ public class SaveManager : Singleton<SaveManager>
     {
         Save(GameManager.Instance.playerStats.characterData,
              GameManager.Instance.playerStats.characterData.name);
+
+        Debug.Log("PlayerData Saved");
     }
 
     public void LoadPlayerData()
     {
-        Debug.Log("Loaded scene:" + PlayerPrefs.GetString(sceneKey));
+        Debug.Log("Loading PlayerData");
+
         Load(GameManager.Instance.playerStats.characterData,
              GameManager.Instance.playerStats.characterData.name);
+
+        Debug.Log("PlayerData Loaded" + GameManager.Instance.playerStats.CurrentExp);
     }
 
     public void Save(Object data, string key)
@@ -49,7 +53,6 @@ public class SaveManager : Singleton<SaveManager>
         var jsonData = JsonUtility.ToJson(data, true);
         PlayerPrefs.SetString(key, jsonData);
         PlayerPrefs.SetString(sceneKey, SceneManager.GetActiveScene().name);
-        Debug.Log("saved scene:" + PlayerPrefs.GetString(sceneKey));
         PlayerPrefs.Save();
     }
 
