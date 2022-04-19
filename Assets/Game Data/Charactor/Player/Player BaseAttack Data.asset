@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 2
   skillRange: 0
-  coolDown: 1
+  attackRate: 1
   minDamage: 5
   maxDamage: 10
   skillMinDamage: 0
   skillMaxDamage: 0
   criticalMultiplier: 2
-  criticalChance: 0.2
+  criticalChance: 0.1

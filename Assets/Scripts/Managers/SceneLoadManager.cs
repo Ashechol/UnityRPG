@@ -109,7 +109,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>, IEndGameObserver
 
     public void LoadFirstLevel()
     {
-        StartCoroutine(LoadScene("Big Plain"));
+        StartCoroutine(LoadScene("Dungeon"));
         StartCoroutine(SaveData());
     }
 

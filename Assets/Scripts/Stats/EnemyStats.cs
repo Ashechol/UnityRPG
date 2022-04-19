@@ -13,56 +13,14 @@ public class EnemyStats : CharacterStats
         enemyData = characterData as EnemyData_SO;
     }
 
-    public void TakeDamage(PlayerStats attacker)
+    public override void TakeDamage(int damage, bool isCritical = false)
     {
-        int damage = Mathf.Max(attacker.Damage - CurrentDefence, 1);
-        CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
+        base.TakeDamage(damage, isCritical);
 
-        bool isdead = (CurrentHealth == 0);
+        GetComponent<EnemyController>().Alarm();
 
-        //FIXME: 只在第一被偷袭看向玩家
-        GetComponent<Transform>().LookAt(attacker.GetComponent<Transform>());
-
-        // if (!GetComponentInChildren<VisualEffect>().enabled)
-        //     GetComponentInChildren<VisualEffect>().enabled = true;
-        // GetComponentInChildren<VisualEffect>().Play();
-
-        if (isdead)
-            GetComponent<EnemyController>().IsDead = isdead;
-
-        if (attacker.isCritical)  // 攻击者暴击
-            GetComponent<Animator>().SetTrigger("hit");
-
-        // Update UI
-        OnHealthBarUpdate?.Invoke(CurrentHealth, MaxHealth);
-
-        // Level Up
         if (CurrentHealth <= 0)
-        {
-            attacker.UpdateExp(enemyData.dropExp);
-        }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        damage = Mathf.Max(damage - CurrentDefence, 1);
-        CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
-
-        bool isdead = (CurrentHealth == 0);
-
-        if (isdead)
-        {
-            if (CompareTag("Player"))
-            {
-                GetComponent<PlayerController>().IsDead = isdead;
-                GameManager.Instance.NotifyObservers();
-            }
-
-            if (CompareTag("Enemy"))
-            {
-                GetComponent<EnemyController>().IsDead = isdead;
-            }
-        }
+            FindObjectOfType<PlayerStats>().UpdateExp(enemyData.dropExp);
 
         OnHealthBarUpdate?.Invoke(CurrentHealth, MaxHealth);
     }

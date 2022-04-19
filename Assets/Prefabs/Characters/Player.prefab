@@ -1852,8 +1852,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c43b0f78c28a424b809e491185c821f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  capColl: {fileID: 0}
   stats: {fileID: 0}
   hitForce: 10
 --- !u!114 &2417395492366186812

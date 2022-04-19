@@ -38,38 +38,9 @@ public class PlayerStats : CharacterStats
         playerData = characterData as PlayerData_SO;
     }
 
-    public void TakeDamage(CharacterStats attacker)
+    public override void TakeDamage(int damage, bool isCritical = false)
     {
-        int damage = Mathf.Max(attacker.Damage - CurrentDefence, 1);
-        CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
-
-        bool isdead = (CurrentHealth == 0);
-
-
-        if (isdead)
-        {
-            GetComponent<PlayerController>().IsDead = isdead;
-            GameManager.Instance.NotifyObservers();
-        }
-
-        if (attacker.isCritical)  // 攻击者暴击
-        {
-            GetComponent<Animator>().SetTrigger("hit");
-        }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        damage = Mathf.Max(damage - CurrentDefence, 1);
-        CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
-
-        bool isdead = (CurrentHealth == 0);
-
-        if (isdead)
-        {
-            GetComponent<PlayerController>().IsDead = isdead;
-            GameManager.Instance.NotifyObservers();
-        }
+        base.TakeDamage(damage, isCritical);
     }
 
     public void UpdateExp(int point)

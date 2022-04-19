@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("critical", stats.isCritical);
             anim.SetTrigger("attack");
             // 重置冷却时间
-            lastAttackTime = stats.attackData.coolDown;
+            lastAttackTime = stats.attackData.attackRate;
         }
 
     }
@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
         if (attackTarget.CompareTag("Enemy"))
         {
             var targetStats = attackTarget.GetComponent<EnemyStats>();
-            targetStats.TakeDamage(stats);
+            targetStats.TakeDamage(stats.Damage, stats.isCritical);
         }
 
         if (attackTarget.CompareTag("Attackable"))

@@ -9,6 +9,7 @@ public class GameManager : Singleton<GameManager>
     private CinemachineFreeLook followCam;
 
     List<IEndGameObserver> endGameObservers = new List<IEndGameObserver>();
+    List<Portal> Portals = new List<Portal>();
 
     protected override void Awake()
     {
@@ -29,6 +30,11 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void RegisterPortal(Portal portal)
+    {
+        Portals.Add(portal);
+    }
+
     public void AddObserver(IEndGameObserver observer)
     {
         endGameObservers.Add(observer);
@@ -37,6 +43,13 @@ public class GameManager : Singleton<GameManager>
     public void RemoveObserver(IEndGameObserver observer)
     {
         endGameObservers.Remove(observer);
+        if (endGameObservers.Count == 1)  // 有 SceneLoadManager
+        {
+            foreach (var p in Portals)
+            {
+                p.isClosed = false;
+            }
+        }
     }
 
     public void NotifyObservers()

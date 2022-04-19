@@ -23,7 +23,7 @@ public class Golem : EnemyController
             attackTarget.GetComponent<NavMeshAgent>().velocity = direction * kickForce;
             attackTarget.GetComponent<Animator>().SetTrigger("dizzy");
 
-            targetStats.TakeDamage(characterStats);
+            targetStats.TakeDamage(stats.Damage, stats.isCritical);
         }
     }
 
@@ -36,7 +36,7 @@ public class Golem : EnemyController
         var rock = Instantiate(rockPrefab, handPos.position, Quaternion.identity);
         // rock.GetComponent<Rock>().target = attackTarget;
         // rock.GetComponent<Rock>().force = throwForce;
-        rock.GetComponent<Rock>().FlyToTarget(characterStats.SkillDamage, attackTarget, throwForce);
+        rock.GetComponent<Rock>().FlyToTarget(stats.SkillDamage, attackTarget, throwForce);
     }
 
 }
