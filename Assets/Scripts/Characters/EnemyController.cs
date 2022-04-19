@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     protected GameObject attackTarget;
     protected Animator anim;
     private Collider coll;
-    protected CharacterStats characterStats;
+    protected EnemyStats stats;
     private bool isWalk, isFollow, isChase, isHit, isDead;
     private bool playerDead;
     protected bool speciality;
@@ -47,7 +47,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        characterStats = GetComponent<CharacterStats>();
+        stats = GetComponent<EnemyStats>();
         coll = GetComponent<Collider>();
         speed = agent.speed;
         guardPos = transform.position;
@@ -180,10 +180,10 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
 
                     if (lastAttackTime < 0)
                     {
-                        lastAttackTime = characterStats.attackData.attackRate;
+                        lastAttackTime = stats.attackData.attackRate;
 
                         // 暴击
-                        characterStats.isCritical = Random.value < characterStats.attackData.criticalChance;
+                        stats.isCritical = Random.value < stats.attackData.criticalChance;
 
                         // 攻击
                         Attack();
@@ -205,7 +205,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         anim.SetBool("walk", isWalk);
         anim.SetBool("follow", isFollow);
         anim.SetBool("chase", isChase);
-        anim.SetBool("critical", characterStats.isCritical);
+        anim.SetBool("critical", stats.isCritical);
         anim.SetBool("dead", isDead);
     }
 
@@ -232,7 +232,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     {
         if (attackTarget != null)
             return Vector3.Distance(attackTarget.transform.position, transform.position) <=
-                                    characterStats.attackData.attackRange;
+                                    stats.attackData.attackRange;
         else
             return false;
 
@@ -242,7 +242,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     {
         if (speciality && attackTarget != null)
             return Vector3.Distance(attackTarget.transform.position, transform.position) <=
-                                    characterStats.attackData.skillRange;
+                                    stats.attackData.skillRange;
         else
             return false;
     }
@@ -260,6 +260,12 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         {
             anim.SetTrigger("skill");
         }
+    }
+
+    public void Alarm()
+    {
+        if (enemyStates != EnemyStates.CHASE)
+            enemyStates = EnemyStates.CHASE;
     }
 
     void GetNewWayPoint()
@@ -283,7 +289,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         // Gizmos.DrawWireSphere(transform.position, sightRadius);
         // 绘制视野扇形
         GizmosEx.DrawWireArc(transform, sightRadius, sightAngle, Color.green, 50, 1);
-        // GizmosEx.DrawWireArc(transform, sightRadius, chaseSightAngle, Color.red);
+        GizmosEx.DrawWireArc(transform, sightRadius, chaseSightAngle, Color.red);
     }
 
     // Animation Event
@@ -294,7 +300,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         {
             // Debug.Log("player!");
             var targetStats = attackTarget.GetComponent<PlayerStats>();
-            targetStats.TakeDamage(characterStats);
+            targetStats.TakeDamage(stats.Damage, stats.isCritical);
         }
     }
 

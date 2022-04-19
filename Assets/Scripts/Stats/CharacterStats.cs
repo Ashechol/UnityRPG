@@ -108,4 +108,31 @@ public class CharacterStats : MonoBehaviour
             characterData = Instantiate(templeteData);
         }
     }
+
+    public virtual void TakeDamage(int damage, bool isCritical = false)
+    {
+        damage = Mathf.Max(damage - CurrentDefence, 1);
+        CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
+
+        bool isdead = (CurrentHealth == 0);
+
+        if (isdead)
+        {
+            if (CompareTag("Player"))
+            {
+                if (isdead)
+                {
+                    GetComponent<PlayerController>().IsDead = isdead;
+                    GameManager.Instance.NotifyObservers();
+                }
+            }
+
+            if (CompareTag("Enemy"))
+            {
+                GetComponent<EnemyController>().IsDead = isdead;
+            }
+        }
+        else if (isCritical)
+            GetComponent<Animator>().SetTrigger("hit");
+    }
 }
