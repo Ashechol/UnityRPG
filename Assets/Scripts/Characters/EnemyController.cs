@@ -193,8 +193,6 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
                 break;
             case EnemyStates.DEAD:
                 coll.enabled = false;
-                // agent.enabled = false;  // 关闭 Agent 防止死亡后继续移动和攻击
-                agent.radius = 0;
                 Destroy(gameObject, 2f);
                 break;
         }

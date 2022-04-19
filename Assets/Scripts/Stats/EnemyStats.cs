@@ -19,6 +19,9 @@ public class EnemyStats : CharacterStats
 
         GetComponent<EnemyController>().Alarm();
 
+        if (CurrentHealth <= 0)
+            FindObjectOfType<PlayerStats>().UpdateExp(enemyData.dropExp);
+
         OnHealthBarUpdate?.Invoke(CurrentHealth, MaxHealth);
     }
 }

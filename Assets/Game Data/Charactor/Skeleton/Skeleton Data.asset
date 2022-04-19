@@ -16,4 +16,4 @@ MonoBehaviour:
   currentHealth: 30
   baseDefence: 5
   currentDefence: 5
-  dropExp: 30
+  dropExp: 15

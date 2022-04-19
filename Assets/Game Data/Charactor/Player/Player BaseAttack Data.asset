@@ -20,4 +20,4 @@ MonoBehaviour:
   skillMinDamage: 0
   skillMaxDamage: 0
   criticalMultiplier: 2
-  criticalChance: 1
+  criticalChance: 0.1

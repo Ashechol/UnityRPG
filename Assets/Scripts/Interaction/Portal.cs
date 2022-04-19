@@ -18,19 +18,32 @@ public class Portal : MonoBehaviour
     public PortalTag dstTag;
 
     public Transform Exit { get { return exit; } }
+    public bool isClosed = false;
 
     void Awake()
     {
         exit = transform.GetComponentInParent<Transform>().GetChild(1);
+        if (isClosed)
+        {
+            GetComponent<Collider>().enabled = false;
+            GetComponentInChildren<MeshRenderer>().enabled = false;
+        }
     }
 
     void Start()
     {
         cam = Camera.main.transform;
+        GameManager.Instance.RegisterPortal(this);
     }
 
     void Update()
     {
+        if (!isClosed)
+        {
+            GetComponent<Collider>().enabled = true;
+            GetComponentInChildren<MeshRenderer>().enabled = true;
+        }
+
         if (Input.GetKeyDown(KeyCode.E) && canTeleport)
         {
             SceneLoadManager.Instance.TeleportToPortal(this);
@@ -45,7 +58,9 @@ public class Portal : MonoBehaviour
     void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
+        {
             canTeleport = SceneLoadManager.Instance.canTeleport = true;
+        }
     }
 
     void OnTriggerExit(Collider other)
