@@ -180,7 +180,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
 
                     if (lastAttackTime < 0)
                     {
-                        lastAttackTime = characterStats.attackData.coolDown;
+                        lastAttackTime = characterStats.attackData.attackRate;
 
                         // 暴击
                         characterStats.isCritical = Random.value < characterStats.attackData.criticalChance;
