@@ -6,7 +6,7 @@ public class Skeleton : EnemyController
 {
     public int skillCountDown;
     private int attackCount;
-    public HitBox hitbox;
+    private HitBox hitbox;
 
     protected override void Awake()
     {

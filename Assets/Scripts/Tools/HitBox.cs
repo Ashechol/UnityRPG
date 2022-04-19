@@ -20,6 +20,7 @@ public class HitBox : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        //TODO: 能否优化?
         if (other.CompareTag("Player"))
         {
             if (dmgType == DamageType.NORMAL)

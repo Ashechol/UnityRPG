@@ -289,7 +289,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         // Gizmos.DrawWireSphere(transform.position, sightRadius);
         // 绘制视野扇形
         GizmosEx.DrawWireArc(transform, sightRadius, sightAngle, Color.green, 50, 1);
-        GizmosEx.DrawWireArc(transform, sightRadius, chaseSightAngle, Color.red);
+        // GizmosEx.DrawWireArc(transform, sightRadius, chaseSightAngle, Color.red, 50, 1);
     }
 
     // Animation Event

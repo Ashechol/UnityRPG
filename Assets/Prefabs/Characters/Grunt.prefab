@@ -204,6 +204,8 @@ MonoBehaviour:
   lookAtTime: 3
   patrolRange: 5
   wayPoint: {x: 0, y: 0, z: 0}
+  monsterType: 0
+  level: 0
   kickForce: 20
 --- !u!114 &8796593393200794637
 MonoBehaviour:
@@ -399,6 +401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2955734189088376071}
+  - component: {fileID: 2938968919634676457}
   m_Layer: 7
   m_Name: Axe
   m_TagString: Untagged
@@ -420,6 +423,19 @@ Transform:
   m_Father: {fileID: 2955734190231087416}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2938968919634676457
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2955734189088376072}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 9.999999, y: 92.29309, z: 74.460556}
+  m_Center: {x: -0.00048217934, y: 59.56683, z: 25.95946}
 --- !u!1 &2955734189160591250
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,6 +597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2955734189419391304}
+  - component: {fileID: 2052132838214611080}
   m_Layer: 7
   m_Name: Hand_L
   m_TagString: Untagged
@@ -603,6 +620,19 @@ Transform:
   m_Father: {fileID: 2955734189949890810}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2052132838214611080
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2955734189419391305}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 30
+  m_Center: {x: -13.64, y: 0, z: 0}
 --- !u!1 &2955734189547763069
 GameObject:
   m_ObjectHideFlags: 0
