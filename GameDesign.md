@@ -8,7 +8,7 @@
   
   * 普通攻击
   
-  * 穿刺攻击
+  * 穿刺攻击（精英敌人）
     
     * 可以无视一定防御
     
@@ -24,14 +24,22 @@
   
   | 名称      | 基础值 | 成长值 |
   | ------- | --- | --- |
-  | Health  |     |     |
-  | Defence |     |     |
-  | DropExp |     |     |
+  | Health  | 30  |     |
+  | Defence | 5   |     |
+  | DropExp | 30  |     |
   
   Skeleton Attack Data
   
-  | 名称           | 基础值 | 成长值 |
-  | ------------ | --- | --- |
-  | Attack Range |     |     |
-  | Skill Range  |     |     |
-  | Attack Rate  |     |     |
+  | 名称                  | 基础值 | 成长值 |
+  | ------------------- | --- | --- |
+  | Attack Range        | 2   |     |
+  | Skill Range         | 2   |     |
+  | Attack Rate         | 1   |     |
+  | Min Damage          | 5   |     |
+  | Max Damage          | 10  |     |
+  | Min Skill Damage    | 10  |     |
+  | Max Skill Damage    | 15  |     |
+  | Critical Multiplier | 2   |     |
+  | Critical Chance     | 0.1 |     |
+
+

@@ -13,7 +13,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     private EnemyStates enemyStates;
     private NavMeshAgent agent;
     protected GameObject attackTarget;
-    private Animator anim;
+    protected Animator anim;
     private Collider coll;
     protected CharacterStats characterStats;
     private bool isWalk, isFollow, isChase, isHit, isDead;
@@ -228,7 +228,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         return false;
     }
 
-    bool TargetInAttackRange()
+    protected bool TargetInAttackRange()
     {
         if (attackTarget != null)
             return Vector3.Distance(attackTarget.transform.position, transform.position) <=
@@ -238,7 +238,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
 
     }
 
-    bool TargetInSkillRange()
+    protected bool TargetInSkillRange()
     {
         if (speciality && attackTarget != null)
             return Vector3.Distance(attackTarget.transform.position, transform.position) <=
@@ -247,7 +247,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
             return false;
     }
 
-    void Attack()
+    protected virtual void Attack()
     {
         transform.LookAt(attackTarget.transform);
 

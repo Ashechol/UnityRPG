@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
-public class AttackDataSOEditor : MonoBehaviour
+[CustomEditor(typeof(AttackData_SO))]
+public class AttackSOEditor : Editor
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void OnInspectorGUI()
     {
-        
-    }
+        base.OnInspectorGUI();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //TODO: 美化 AttackData 的面板
     }
 }
