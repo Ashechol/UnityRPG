@@ -59,7 +59,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 300
-  field of view: 58.149193
+  field of view: 50
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -84,7 +84,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1725836274402142536}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!114 &1725836274402142532
 MonoBehaviour:
   m_ObjectHideFlags: 0

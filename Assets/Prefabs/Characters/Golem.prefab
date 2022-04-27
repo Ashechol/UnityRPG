@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 108473136388842845}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.69, z: 0}
+  m_LocalPosition: {x: 0, y: 4.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4723024255851807343}
@@ -833,6 +833,8 @@ MonoBehaviour:
   lookAtTime: 0
   patrolRange: 0
   wayPoint: {x: 0, y: 0, z: 0}
+  monsterType: 1
+  level: 0
   kickForce: 25
   throwForce: 20
   rockPrefab: {fileID: 1642026572374376849, guid: 0bd5fae196542454585c92c4ec757038, type: 3}
@@ -867,8 +869,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heathBar: {fileID: 7256677866069128951, guid: 2120d243375ea6349b5b38ede5633822, type: 3}
   healthBarPoint: {fileID: 1912903288754447269}
-  alwaysVisible: 0
-  visibleTime: 0
+  alwaysVisible: 1
+  visibleTime: 10
 --- !u!114 &1160189653104597087
 MonoBehaviour:
   m_ObjectHideFlags: 0
