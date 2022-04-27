@@ -59,6 +59,9 @@ public class PlayerStats : CharacterStats
         playerData.maxHealth = (int)(playerData.maxHealth * playerData.healthBuff);
         playerData.currentHealth = playerData.maxHealth;
 
+        attackData.minDamage = (int)(attackData.minDamage * playerData.healthBuff);
+        attackData.maxDamage = (int)(attackData.maxDamage * playerData.healthBuff);
+
         Debug.Log("LEVEL UP! " + playerData.currentHealth + " MaxHealth: " + playerData.maxHealth);
     }
 }

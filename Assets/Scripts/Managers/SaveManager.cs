@@ -15,7 +15,7 @@ public class SaveManager : Singleton<SaveManager>
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "Main Menu")
         {
             SaveManager.Instance.SavePlayerData();
             SceneLoadManager.Instance.LoadMainMenu();

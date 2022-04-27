@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private NavMeshAgent agent;
     private Animator anim;
     private CapsuleCollider capColl;
+    private AudioSource audioSource;
     public PlayerStats stats;
     public float hitForce = 20;
     private GameObject attackTarget;
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         stats = GetComponent<PlayerStats>();
         capColl = GetComponent<CapsuleCollider>();
+        audioSource = GetComponent<AudioSource>();
         stopDistance = agent.stoppingDistance;
     }
 
@@ -130,6 +132,7 @@ public class PlayerController : MonoBehaviour
         {
             var targetStats = attackTarget.GetComponent<EnemyStats>();
             targetStats.TakeDamage(stats.Damage, stats.isCritical);
+            audioSource.Play();
         }
 
         if (attackTarget.CompareTag("Attackable"))
