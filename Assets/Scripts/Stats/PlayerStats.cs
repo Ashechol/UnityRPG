@@ -7,6 +7,9 @@ public class PlayerStats : CharacterStats
     [HideInInspector]
     public PlayerData_SO playerData;
 
+    [Header("Weapon")]
+    public Transform weaponSlot;
+
     #region Read from Ddata_SO
 
     public int CurrentExp
@@ -64,4 +67,17 @@ public class PlayerStats : CharacterStats
 
         Debug.Log("LEVEL UP! " + playerData.currentHealth + " MaxHealth: " + playerData.maxHealth);
     }
+
+    #region Equip Weapon
+
+    public void EquipWeapon(ItemData_SO weapon)
+    {
+        if (weapon.weaponPrefab != null)
+        {
+            Instantiate(weapon.weaponPrefab, weaponSlot);
+            //TODO: 更新属性
+        }
+    }
+
+    #endregion
 }

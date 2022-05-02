@@ -1872,6 +1872,7 @@ MonoBehaviour:
   attackData: {fileID: 11400000, guid: 06ee8c8cd71b3fc4fb5e673ccd5f4c63, type: 2}
   isCritical: 0
   playerData: {fileID: 0}
+  weaponSlot: {fileID: 6449158702149710441}
 --- !u!82 &5188620793220495280
 AudioSource:
   m_ObjectHideFlags: 0

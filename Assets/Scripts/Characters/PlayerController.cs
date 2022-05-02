@@ -86,7 +86,6 @@ public class PlayerController : MonoBehaviour
     }
 
     // Coroutine
-    //TODO: 优化代码结构
     IEnumerator MoveToAttackTarget()
     {
         agent.isStopped = false;
@@ -94,34 +93,24 @@ public class PlayerController : MonoBehaviour
 
         transform.LookAt(attackTarget.transform);
 
-        if (attackTarget.CompareTag("Attackable"))
+        while (Vector3.Distance(attackTarget.transform.position, transform.position) > stats.attackData.attackRange)
         {
-            var closestPoint = attackTarget.GetComponent<Collider>().bounds.ClosestPoint(transform.position);
-            while (Vector3.Distance(closestPoint, transform.position) > 1)
-            {
-                agent.destination = attackTarget.transform.position;
-                yield return null;  // yield return 暂时挂起，下一帧继续从这里开始执行协程
-            }
+            agent.destination = attackTarget.transform.position;
+            yield return null;  // yield return 暂时挂起，下一帧继续从这里开始执行协程
         }
-        else
-            while (Vector3.Distance(attackTarget.transform.position,
-                           transform.position) > stats.attackData.attackRange)
-            {
-                agent.destination = attackTarget.transform.position;
-                yield return null;  // yield return 暂时挂起，下一帧继续从这里开始执行协程
-            }
 
-        agent.isStopped = true;
-
-        // Attack
-        if (lastAttackTime < 0)
+        if (lastAttackTime < 0)  // attack
         {
+            agent.isStopped = true;
             stats.isCritical = Random.value < stats.attackData.criticalChance;
             anim.SetBool("critical", stats.isCritical);
             anim.SetTrigger("attack");
             // 重置冷却时间
             lastAttackTime = stats.attackData.attackRate;
         }
+
+        lastAttackTime -= Time.deltaTime;
+
 
     }
 

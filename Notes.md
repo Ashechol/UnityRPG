@@ -68,3 +68,9 @@ Vector3.Distance() 和 Vector3.SqrMagnitude()，后者的开销较少
 * UV：贴图坐标相当于空间坐标XY的概念，shader中的UV输入就是贴图输入的意思
 
 * 通道数从上往下按需要的数量取
+
+
+
+### UI
+
+Grid Layout Croup：管理子UI物体的排列
