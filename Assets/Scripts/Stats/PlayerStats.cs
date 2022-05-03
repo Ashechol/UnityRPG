@@ -76,6 +76,12 @@ public class PlayerStats : CharacterStats
         {
             Instantiate(weapon.weaponPrefab, weaponSlot);
             //TODO: 更新属性
+            attackData.attackRange = weapon.attackRange;
+            attackData.attackRate = weapon.attackRate;
+            attackData.minDamage += weapon.minDamage;
+            attackData.maxDamage += weapon.maxDamage;
+            attackData.criticalChance = weapon.criticalChance;
+            attackData.criticalMultiplier = weapon.criticalMultiplier;
         }
     }
 

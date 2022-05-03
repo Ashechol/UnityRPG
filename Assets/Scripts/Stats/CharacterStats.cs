@@ -4,8 +4,9 @@ using UnityEngine.VFX;
 
 public class CharacterStats : MonoBehaviour
 {
-    public CharacterData_SO templeteData;
+    public CharacterData_SO templeteCharacterData;
     public CharacterData_SO characterData;
+    public AttackData_SO templeteAttackData;
     public AttackData_SO attackData;
 
     [HideInInspector]
@@ -103,10 +104,13 @@ public class CharacterStats : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if (templeteData != null)
+        if (templeteCharacterData != null)
         {
-            characterData = Instantiate(templeteData);
+            characterData = Instantiate(templeteCharacterData);
         }
+
+        if (templeteAttackData != null)
+            attackData = Instantiate(templeteAttackData);
     }
 
     public virtual void TakeDamage(int damage, bool isCritical = false)

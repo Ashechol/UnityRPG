@@ -74,13 +74,18 @@ public class PlayerController : MonoBehaviour
         agent.stoppingDistance = stopDistance;  // 正常移动不需要按照攻击距离判断
     }
 
+
+    //TODO: 优化攻击逻辑
     private void EventAttack(GameObject target)
     {
         if (isDead) return;
 
         if (target != null)  // 防止敌人死亡后目标消失报错
         {
-            attackTarget = target;
+            if (attackTarget != target)
+            {
+                attackTarget = target;
+            }
             StartCoroutine(MoveToAttackTarget());
         }
     }
@@ -93,7 +98,9 @@ public class PlayerController : MonoBehaviour
 
         transform.LookAt(attackTarget.transform);
 
-        while (Vector3.Distance(attackTarget.transform.position, transform.position) > stats.attackData.attackRange)
+        var closestPos = attackTarget.GetComponent<Collider>().bounds.ClosestPoint(transform.position);
+
+        while (Vector3.Distance(closestPos, transform.position) > stats.attackData.attackRange)
         {
             agent.destination = attackTarget.transform.position;
             yield return null;  // yield return 暂时挂起，下一帧继续从这里开始执行协程
@@ -108,9 +115,6 @@ public class PlayerController : MonoBehaviour
             // 重置冷却时间
             lastAttackTime = stats.attackData.attackRate;
         }
-
-        lastAttackTime -= Time.deltaTime;
-
 
     }
 

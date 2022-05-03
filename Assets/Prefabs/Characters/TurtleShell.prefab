@@ -754,9 +754,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d04a692c230e69645928c3f65250dcd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  templeteData: {fileID: 11400000, guid: 886c868b2ac0135488cda27b408ee476, type: 2}
+  templeteCharacterData: {fileID: 11400000, guid: 886c868b2ac0135488cda27b408ee476, type: 2}
   characterData: {fileID: 0}
-  attackData: {fileID: 11400000, guid: f56b9c3f96253a64ab9c5ef829dc7320, type: 2}
+  templeteAttackData: {fileID: 11400000, guid: f56b9c3f96253a64ab9c5ef829dc7320, type: 2}
+  attackData: {fileID: 0}
   isCritical: 0
   enemyData: {fileID: 0}
 --- !u!114 &8637940393313528636

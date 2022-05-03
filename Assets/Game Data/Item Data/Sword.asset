@@ -15,7 +15,14 @@ MonoBehaviour:
   itemType: 1
   itemName: Sword
   itemIcon: {fileID: 0}
-  itemAmount: 0
+  itemAmount: 1
   stackable: 0
   description: "\u8FD9\u662F\u4E00\u62D4\u5251"
   weaponPrefab: {fileID: 8432259815778970063, guid: c91b6fdac3e2c604b8d9e5b12c55e100, type: 3}
+  attackRange: 1.8
+  attackRate: 1
+  minDamage: 5
+  maxDamage: 7
+  criticalMultiplier: 2
+  criticalChance: 0.1
+  minLevel: 0

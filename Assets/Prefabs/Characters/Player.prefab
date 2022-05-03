@@ -1867,9 +1867,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cdf1f04a467eab4e85e9321342ea991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  templeteData: {fileID: 11400000, guid: c66807ed3e99a6845b8e20a240efc73c, type: 2}
+  templeteCharacterData: {fileID: 11400000, guid: c66807ed3e99a6845b8e20a240efc73c, type: 2}
   characterData: {fileID: 0}
-  attackData: {fileID: 11400000, guid: 06ee8c8cd71b3fc4fb5e673ccd5f4c63, type: 2}
+  templeteAttackData: {fileID: 11400000, guid: 06ee8c8cd71b3fc4fb5e673ccd5f4c63, type: 2}
+  attackData: {fileID: 0}
   isCritical: 0
   playerData: {fileID: 0}
   weaponSlot: {fileID: 6449158702149710441}

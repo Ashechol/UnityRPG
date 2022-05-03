@@ -9,7 +9,7 @@ public class ItemPickUp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.Instance.playerStats.EquipWeapon(itemData);
+            InventoryManager.Instance.inventoryData.AddItem(itemData, itemData.itemAmount);
 
             Destroy(gameObject);
         }

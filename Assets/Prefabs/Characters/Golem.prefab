@@ -851,8 +851,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119f543564a3ecf4e91b2e3852c9aa88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  templeteData: {fileID: 11400000, guid: 14755a58bd0b9f743a50798184adb989, type: 2}
+  templeteCharacterData: {fileID: 0}
   characterData: {fileID: 0}
+  templeteAttackData: {fileID: 0}
   attackData: {fileID: 11400000, guid: 4009bbfdbc191be4ba21473558c152e8, type: 2}
   isCritical: 0
 --- !u!114 &8786953876376511743
@@ -883,9 +884,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d04a692c230e69645928c3f65250dcd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  templeteData: {fileID: 11400000, guid: 14755a58bd0b9f743a50798184adb989, type: 2}
+  templeteCharacterData: {fileID: 11400000, guid: 14755a58bd0b9f743a50798184adb989, type: 2}
   characterData: {fileID: 0}
-  attackData: {fileID: 11400000, guid: 4009bbfdbc191be4ba21473558c152e8, type: 2}
+  templeteAttackData: {fileID: 11400000, guid: 4009bbfdbc191be4ba21473558c152e8, type: 2}
+  attackData: {fileID: 0}
   isCritical: 0
   enemyData: {fileID: 0}
 --- !u!1 &4723024255875520043

@@ -16,6 +16,11 @@ public class ItemData_SO : ScriptableObject
 
     [Header("Weapon")]
     public GameObject weaponPrefab;
-
-
+    public float attackRange;
+    public float attackRate;
+    public int minDamage;
+    public int maxDamage;
+    public float criticalMultiplier;
+    public float criticalChance;
+    public int minLevel;
 }
